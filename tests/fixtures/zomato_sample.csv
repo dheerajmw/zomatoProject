@@ -1,0 +1,4 @@
+url,address,name,online_order,book_table,rate,votes,phone,location,rest_type,dish_liked,cuisines,approx_cost(for two people),reviews_list,menu_item,listed_in(type),listed_in(city)
+https://example.com/r1,"100 Road, Bangalore",Fixture North Kitchen,Yes,Yes,4.2/5,100,080000,Banashankari,Casual Dining,,North Indian,600,[],[],Dine-out,Bangalore
+https://example.com/r2,"200 Road, Bangalore",Fixture Unrated Spot,Yes,No,NEW,0,080000,Banashankari,Cafe,,Cafe,400,[],[],Dine-out,Bangalore
+https://example.com/r3,"300 Road, Mumbai",Fixture Chinese Wok,No,No,3.9/5,50,080000,Bandra,Casual Dining,,Chinese,1200,[],[],Dine-out,Mumbai

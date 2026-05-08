@@ -1,0 +1,16 @@
+url,address,name,online_order,book_table,rate,votes,phone,location,rest_type,dish_liked,cuisines,approx_cost(for two people),reviews_list,menu_item,listed_in(type),listed_in(city)
+https://example.com/d1,"Connaught Place, New Delhi",Bukhara,Yes,Yes,4.8/5,5200,011-26112233,Connaught Place,Fine Dining,Dal Bukhara,North Indian/Mughlai,3000,[],[],Dine-out,Delhi
+https://example.com/d2,"Khan Market, New Delhi",Indian Accent,Yes,Yes,4.7/5,3100,011-26112234,Khan Market,Fine Dining,Meetha Achar Lamb,Continental/North Indian,4000,[],[],Dine-out,Delhi
+https://example.com/d3,"Hauz Khas Village, New Delhi",Naivedyam,No,No,4.5/5,1800,011-26112235,Hauz Khas,Casual Dining,Idli,South Indian,1200,[],[],Dine-out,Delhi
+https://example.com/d4,"Lajpat Nagar, New Delhi",Al Jawahar,Yes,No,4.4/5,2200,011-26112236,Lajpat Nagar,Casual Dining,Nihari,Mughlai/North Indian,1500,[],[],Dine-out,Delhi
+https://example.com/d5,"Saket, New Delhi",Smoke House Deli,Yes,Yes,4.3/5,1500,011-26112237,Saket,Casual Dining,Pasta,Continental/Italian,2000,[],[],Dine-out,Delhi
+https://example.com/d6,"Connaught Place, New Delhi",Farzi Cafe,Yes,Yes,4.3/5,2800,011-26112238,Connaught Place,Casual Dining,Pani Puri Shots,North Indian/Continental,2500,[],[],Dine-out,Delhi
+https://example.com/d7,"Hauz Khas, New Delhi",Social,Yes,No,4.2/5,3200,011-26112239,Hauz Khas,Bar,Nachos,Continental/Chinese,1800,[],[],Dine-out,Delhi
+https://example.com/d8,"Karol Bagh, New Delhi",Kake Da Hotel,No,No,4.5/5,4100,011-26112240,Karol Bagh,Casual Dining,Butter Chicken,North Indian,1200,[],[],Dine-out,Delhi
+https://example.com/d9,"Chandni Chowk, New Delhi",Paranthe Wali Gali,No,No,4.1/5,3800,011-26112241,Chandni Chowk,Street Food,Parantha,North Indian,400,[],[],Dine-out,Delhi
+https://example.com/d10,"Vasant Kunj, New Delhi",Mamagoto,Yes,Yes,4.4/5,1900,011-26112242,Vasant Kunj,Casual Dining,Dimsums,Chinese/Asian,1800,[],[],Dine-out,Delhi
+https://example.com/d11,"Greater Kailash, New Delhi",Sagar Ratna,Yes,No,4.0/5,2100,011-26112243,Greater Kailash,Casual Dining,Dosa,South Indian,800,[],[],Dine-out,Delhi
+https://example.com/d12,"Nehru Place, New Delhi",Moti Mahal,Yes,Yes,4.3/5,1600,011-26112244,Nehru Place,Casual Dining,Butter Chicken,Mughlai/North Indian,1500,[],[],Dine-out,Delhi
+https://example.com/d13,"Saket, New Delhi",Yum Yum Cha,Yes,Yes,4.2/5,1200,011-26112245,Saket,Casual Dining,Dimsums,Chinese/Japanese,2000,[],[],Dine-out,Delhi
+https://example.com/d14,"Connaught Place, New Delhi",Wenger's,No,No,4.6/5,5500,011-26112246,Connaught Place,Bakery,Patties,Continental/Bakery,600,[],[],Dine-out,Delhi
+https://example.com/d15,"Lodi Colony, New Delhi",Lodi - The Garden Restaurant,Yes,Yes,4.5/5,1400,011-26112247,Lodi Colony,Fine Dining,Lamb Chops,Continental/North Indian,3500,[],[],Dine-out,Delhi
