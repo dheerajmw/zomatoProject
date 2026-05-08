@@ -25,7 +25,7 @@ _inject_secrets()
 
 # Point to the bundled sample CSV so we never hit HuggingFace on Streamlit Cloud.
 # Users can override by setting ZOMATO_CSV_PATH in secrets to a real dataset path.
-_SAMPLE_CSV = str(Path(__file__).parent / "tests" / "fixtures" / "delhi_sample.csv")
+_SAMPLE_CSV = str(Path(__file__).parent / "tests" / "fixtures" / "zomato_full_sample.csv")
 if not os.environ.get("ZOMATO_CSV_PATH"):
     os.environ["ZOMATO_CSV_PATH"] = _SAMPLE_CSV
 

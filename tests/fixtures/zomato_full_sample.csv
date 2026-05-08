@@ -1,0 +1,88 @@
+url,address,name,online_order,book_table,rate,votes,phone,location,rest_type,dish_liked,cuisines,approx_cost(for two people),reviews_list,menu_item,listed_in(type),listed_in(city)
+https://example.com/b1,"Indiranagar, Bangalore",Toit Brewpub,Yes,Yes,4.6/5,8200,080-25209090,Indiranagar,Bar,,Continental/North Indian,1500,[],[],Dine-out,Bangalore
+https://example.com/b2,"Koramangala, Bangalore",Truffles,Yes,No,4.7/5,12000,080-41255556,Koramangala,Casual Dining,,American/Continental,800,[],[],Dine-out,Bangalore
+https://example.com/b3,"MG Road, Bangalore",Koshy's,No,No,4.4/5,5500,080-22213793,MG Road,Casual Dining,,Continental/South Indian,600,[],[],Dine-out,Bangalore
+https://example.com/b4,"Whitefield, Bangalore",Barbeque Nation,Yes,Yes,4.3/5,9800,1800-120-2180,Whitefield,Casual Dining,,North Indian/Mughlai,1200,[],[],Dine-out,Bangalore
+https://example.com/b5,"Jayanagar, Bangalore",MTR,No,No,4.5/5,7200,080-22220022,Jayanagar,Casual Dining,,South Indian,400,[],[],Dine-out,Bangalore
+https://example.com/b6,"HSR Layout, Bangalore",The Fatty Bao,Yes,Yes,4.4/5,3200,080-41255557,HSR Layout,Casual Dining,,Asian/Chinese,1200,[],[],Dine-out,Bangalore
+https://example.com/b7,"Bellandur, Bangalore",Punjabi Tadka,Yes,No,4.1/5,2100,080-41255558,Bellandur,Casual Dining,,North Indian,600,[],[],Dine-out,Bangalore
+https://example.com/b8,"Marathahalli, Bangalore",Meghana Foods,Yes,No,4.5/5,6700,080-41255559,Marathahalli,Casual Dining,,Biryani/South Indian,500,[],[],Dine-out,Bangalore
+https://example.com/b9,"Koramangala, Bangalore",The Black Pearl,Yes,Yes,4.2/5,1800,080-41255560,Koramangala,Bar,,Continental/Chinese,1500,[],[],Dine-out,Bangalore
+https://example.com/b10,"Indiranagar, Bangalore",Hole in the Wall Cafe,Yes,No,4.3/5,2900,080-41255561,Indiranagar,Cafe,,Continental/Italian,800,[],[],Dine-out,Bangalore
+https://example.com/d1,"Connaught Place, New Delhi",Bukhara,Yes,Yes,4.8/5,5200,011-26112233,Connaught Place,Fine Dining,,North Indian/Mughlai,3000,[],[],Dine-out,Delhi
+https://example.com/d2,"Khan Market, New Delhi",Indian Accent,Yes,Yes,4.7/5,3100,011-26112234,Khan Market,Fine Dining,,Continental/North Indian,4000,[],[],Dine-out,Delhi
+https://example.com/d3,"Hauz Khas, New Delhi",Naivedyam,No,No,4.5/5,1800,011-26112235,Hauz Khas,Casual Dining,,South Indian,1200,[],[],Dine-out,Delhi
+https://example.com/d4,"Lajpat Nagar, New Delhi",Al Jawahar,Yes,No,4.4/5,2200,011-26112236,Lajpat Nagar,Casual Dining,,Mughlai/North Indian,1500,[],[],Dine-out,Delhi
+https://example.com/d5,"Saket, New Delhi",Smoke House Deli,Yes,Yes,4.3/5,1500,011-26112237,Saket,Casual Dining,,Continental/Italian,2000,[],[],Dine-out,Delhi
+https://example.com/d6,"Connaught Place, New Delhi",Farzi Cafe,Yes,Yes,4.3/5,2800,011-26112238,Connaught Place,Casual Dining,,North Indian/Continental,2500,[],[],Dine-out,Delhi
+https://example.com/d7,"Hauz Khas, New Delhi",Social,Yes,No,4.2/5,3200,011-26112239,Hauz Khas,Bar,,Continental/Chinese,1800,[],[],Dine-out,Delhi
+https://example.com/d8,"Karol Bagh, New Delhi",Kake Da Hotel,No,No,4.5/5,4100,011-26112240,Karol Bagh,Casual Dining,,North Indian,1200,[],[],Dine-out,Delhi
+https://example.com/d9,"Vasant Kunj, New Delhi",Mamagoto,Yes,Yes,4.4/5,1900,011-26112242,Vasant Kunj,Casual Dining,,Chinese/Asian,1800,[],[],Dine-out,Delhi
+https://example.com/d10,"Nehru Place, New Delhi",Moti Mahal,Yes,Yes,4.3/5,1600,011-26112244,Nehru Place,Casual Dining,,Mughlai/North Indian,1500,[],[],Dine-out,Delhi
+https://example.com/d11,"Lodi Colony, New Delhi",Lodi - The Garden Restaurant,Yes,Yes,4.5/5,1400,011-26112247,Lodi Colony,Fine Dining,,Continental/North Indian,3500,[],[],Dine-out,Delhi
+https://example.com/d12,"Chandni Chowk, New Delhi",Karim's,No,No,4.4/5,6800,011-23264981,Chandni Chowk,Casual Dining,,Mughlai/North Indian,800,[],[],Dine-out,Delhi
+https://example.com/d13,"Greater Kailash, New Delhi",Sagar Ratna,Yes,No,4.0/5,2100,011-26112243,Greater Kailash,Casual Dining,,South Indian,800,[],[],Dine-out,Delhi
+https://example.com/d14,"Saket, New Delhi",Yum Yum Cha,Yes,Yes,4.2/5,1200,011-26112245,Saket,Casual Dining,,Chinese/Japanese,2000,[],[],Dine-out,Delhi
+https://example.com/d15,"Connaught Place, New Delhi",Wenger's,No,No,4.6/5,5500,011-26112246,Connaught Place,Bakery,,Continental/Bakery,600,[],[],Dine-out,Delhi
+https://example.com/m1,"Bandra, Mumbai",Bastian,Yes,Yes,4.6/5,4200,022-26420082,Bandra,Casual Dining,,Seafood/Continental,2500,[],[],Dine-out,Mumbai
+https://example.com/m2,"Colaba, Mumbai",Leopold Cafe,Yes,No,4.2/5,6800,022-22020131,Colaba,Casual Dining,,Continental/Chinese,1200,[],[],Dine-out,Mumbai
+https://example.com/m3,"Juhu, Mumbai",Prithvi Cafe,No,No,4.4/5,3100,022-26149546,Juhu,Cafe,,Continental/Italian,800,[],[],Dine-out,Mumbai
+https://example.com/m4,"Lower Parel, Mumbai",Pali Village Cafe,Yes,Yes,4.3/5,2200,022-26420083,Lower Parel,Casual Dining,,Continental/Italian,1500,[],[],Dine-out,Mumbai
+https://example.com/m5,"Andheri, Mumbai",Hitchki,Yes,Yes,4.2/5,1900,022-26420084,Andheri,Casual Dining,,North Indian/Continental,1800,[],[],Dine-out,Mumbai
+https://example.com/m6,"Fort, Mumbai",Britannia and Co,No,No,4.5/5,4500,022-22615264,Fort,Casual Dining,,Parsi/Continental,800,[],[],Dine-out,Mumbai
+https://example.com/m7,"Bandra, Mumbai",Pali Bhavan,Yes,Yes,4.3/5,1700,022-26420085,Bandra,Casual Dining,,North Indian/Continental,2000,[],[],Dine-out,Mumbai
+https://example.com/m8,"Worli, Mumbai",Hakkasan,Yes,Yes,4.5/5,2800,022-40496228,Worli,Fine Dining,,Chinese,4000,[],[],Dine-out,Mumbai
+https://example.com/m9,"Powai, Mumbai",Neel,Yes,Yes,4.4/5,1500,022-26420086,Powai,Casual Dining,,North Indian/Mughlai,1800,[],[],Dine-out,Mumbai
+https://example.com/m10,"Dadar, Mumbai",Cafe Madras,No,No,4.3/5,3200,022-24143966,Dadar,Casual Dining,,South Indian,400,[],[],Dine-out,Mumbai
+https://example.com/h1,"Banjara Hills, Hyderabad",Ohri's Jiva Imperia,Yes,Yes,4.4/5,2800,040-23540000,Banjara Hills,Fine Dining,,North Indian/Mughlai,2000,[],[],Dine-out,Hyderabad
+https://example.com/h2,"Jubilee Hills, Hyderabad",Chutneys,Yes,No,4.5/5,5600,040-23540001,Jubilee Hills,Casual Dining,,South Indian,600,[],[],Dine-out,Hyderabad
+https://example.com/h3,"Gachibowli, Hyderabad",Paradise Biryani,Yes,No,4.4/5,8900,040-23540002,Gachibowli,Casual Dining,,Biryani/Mughlai,700,[],[],Dine-out,Hyderabad
+https://example.com/h4,"Madhapur, Hyderabad",Flechazo,Yes,Yes,4.3/5,1900,040-23540003,Madhapur,Casual Dining,,Continental/Italian,1500,[],[],Dine-out,Hyderabad
+https://example.com/h5,"Secunderabad, Hyderabad",Minerva Coffee Shop,No,No,4.2/5,3400,040-27840028,Secunderabad,Casual Dining,,South Indian/North Indian,500,[],[],Dine-out,Hyderabad
+https://example.com/h6,"Banjara Hills, Hyderabad",Absolute Barbecues,Yes,Yes,4.3/5,4200,040-23540004,Banjara Hills,Casual Dining,,North Indian/Continental,1200,[],[],Dine-out,Hyderabad
+https://example.com/h7,"Hitech City, Hyderabad",Farzi Cafe,Yes,Yes,4.2/5,2100,040-23540005,Hitech City,Casual Dining,,North Indian/Continental,2000,[],[],Dine-out,Hyderabad
+https://example.com/h8,"Jubilee Hills, Hyderabad",Cream Stone,Yes,No,4.4/5,3800,040-23540006,Jubilee Hills,Dessert,,Desserts/Ice Cream,400,[],[],Dine-out,Hyderabad
+https://example.com/c1,"Anna Nagar, Chennai",Murugan Idli Shop,Yes,No,4.5/5,6700,044-26161616,Anna Nagar,Casual Dining,,South Indian,300,[],[],Dine-out,Chennai
+https://example.com/c2,"Nungambakkam, Chennai",Peshawri,Yes,Yes,4.4/5,2100,044-28554545,Nungambakkam,Fine Dining,,North Indian/Mughlai,2500,[],[],Dine-out,Chennai
+https://example.com/c3,"Adyar, Chennai",Saravana Bhavan,Yes,No,4.3/5,8900,044-24420050,Adyar,Casual Dining,,South Indian,400,[],[],Dine-out,Chennai
+https://example.com/c4,"T Nagar, Chennai",Anjappar,Yes,No,4.2/5,4500,044-24420051,T Nagar,Casual Dining,,Chettinad/South Indian,600,[],[],Dine-out,Chennai
+https://example.com/c5,"Velachery, Chennai",Copper Chimney,Yes,Yes,4.3/5,1800,044-24420052,Velachery,Casual Dining,,North Indian/Mughlai,1200,[],[],Dine-out,Chennai
+https://example.com/c6,"Mylapore, Chennai",Ratna Cafe,No,No,4.4/5,3200,044-24993434,Mylapore,Casual Dining,,South Indian,300,[],[],Dine-out,Chennai
+https://example.com/c7,"OMR, Chennai",The Flying Elephant,Yes,Yes,4.5/5,1600,044-24420053,OMR,Fine Dining,,Continental/North Indian,3000,[],[],Dine-out,Chennai
+https://example.com/k1,"Park Street, Kolkata",Peter Cat,Yes,No,4.5/5,7800,033-22298841,Park Street,Casual Dining,,Continental/Mughlai,1200,[],[],Dine-out,Kolkata
+https://example.com/k2,"New Market, Kolkata",Flurys,Yes,No,4.4/5,5600,033-22298842,New Market,Bakery,,Continental/Bakery,600,[],[],Dine-out,Kolkata
+https://example.com/k3,"Salt Lake, Kolkata",Oh Calcutta,Yes,Yes,4.3/5,2900,033-22298843,Salt Lake,Casual Dining,,Bengali/Seafood,1500,[],[],Dine-out,Kolkata
+https://example.com/k4,"Ballygunge, Kolkata",Bhojohori Manna,Yes,No,4.4/5,4200,033-22298844,Ballygunge,Casual Dining,,Bengali,800,[],[],Dine-out,Kolkata
+https://example.com/k5,"Esplanade, Kolkata",Arsalan,Yes,No,4.5/5,6100,033-22298845,Esplanade,Casual Dining,,Mughlai/Biryani,700,[],[],Dine-out,Kolkata
+https://example.com/k6,"Gariahat, Kolkata",6 Ballygunge Place,Yes,Yes,4.4/5,3100,033-22298846,Gariahat,Casual Dining,,Bengali/Continental,1200,[],[],Dine-out,Kolkata
+https://example.com/p1,"Koregaon Park, Pune",Malaka Spice,Yes,Yes,4.4/5,3800,020-26120000,Koregaon Park,Casual Dining,,Asian/Continental,1200,[],[],Dine-out,Pune
+https://example.com/p2,"FC Road, Pune",Vaishali,No,No,4.5/5,7200,020-26120001,FC Road,Casual Dining,,South Indian,400,[],[],Dine-out,Pune
+https://example.com/p3,"Baner, Pune",The Flour Works,Yes,Yes,4.3/5,2100,020-26120002,Baner,Casual Dining,,Continental/Italian,1500,[],[],Dine-out,Pune
+https://example.com/p4,"Viman Nagar, Pune",Sante Spa Cuisine,Yes,Yes,4.4/5,1600,020-26120003,Viman Nagar,Casual Dining,,Continental/Healthy Food,1800,[],[],Dine-out,Pune
+https://example.com/p5,"Camp, Pune",Cafe Goodluck,No,No,4.3/5,4500,020-26120004,Camp,Cafe,,Continental/Bakery,500,[],[],Dine-out,Pune
+https://example.com/p6,"Kothrud, Pune",Shabree,Yes,No,4.2/5,2800,020-26120005,Kothrud,Casual Dining,,Maharashtrian/North Indian,600,[],[],Dine-out,Pune
+https://example.com/g1,"Panaji, Goa",Fisherman's Wharf,Yes,Yes,4.4/5,3200,0832-2220000,Panaji,Casual Dining,,Seafood/Goan,1500,[],[],Dine-out,Goa
+https://example.com/g2,"Calangute, Goa",Britto's,Yes,No,4.2/5,4800,0832-2220001,Calangute,Casual Dining,,Seafood/Continental,1200,[],[],Dine-out,Goa
+https://example.com/g3,"Anjuna, Goa",Curlies,Yes,No,4.1/5,3600,0832-2220002,Anjuna,Bar,,Continental/Seafood,1000,[],[],Dine-out,Goa
+https://example.com/g4,"Panjim, Goa",Viva Panjim,No,No,4.3/5,2100,0832-2220003,Panjim,Casual Dining,,Goan/Seafood,800,[],[],Dine-out,Goa
+https://example.com/g5,"Baga, Goa",Tito's,Yes,No,4.0/5,5200,0832-2220004,Baga,Bar,,Continental/Seafood,1500,[],[],Dine-out,Goa
+https://example.com/n1,"Sector 18, Noida",Barbeque Nation,Yes,Yes,4.3/5,3800,0120-4000000,Sector 18,Casual Dining,,North Indian/Continental,1200,[],[],Dine-out,Noida
+https://example.com/n2,"Sector 62, Noida",Haldiram's,Yes,No,4.2/5,5600,0120-4000001,Sector 62,Casual Dining,,North Indian/Sweets,500,[],[],Dine-out,Noida
+https://example.com/n3,"Sector 50, Noida",Mainland China,Yes,Yes,4.3/5,2200,0120-4000002,Sector 50,Casual Dining,,Chinese,1500,[],[],Dine-out,Noida
+https://example.com/n4,"Sector 18, Noida",Farzi Cafe,Yes,Yes,4.2/5,1800,0120-4000003,Sector 18,Casual Dining,,North Indian/Continental,2000,[],[],Dine-out,Noida
+https://example.com/n5,"Sector 104, Noida",Punjabi By Nature,Yes,Yes,4.1/5,1500,0120-4000004,Sector 104,Casual Dining,,North Indian/Punjabi,1500,[],[],Dine-out,Noida
+https://example.com/gu1,"DLF Cyber City, Gurgaon",Farzi Cafe,Yes,Yes,4.4/5,3200,0124-4000000,DLF Cyber City,Casual Dining,,North Indian/Continental,2000,[],[],Dine-out,Gurgaon
+https://example.com/gu2,"MG Road, Gurgaon",Pind Balluchi,Yes,Yes,4.2/5,2800,0124-4000001,MG Road,Casual Dining,,North Indian/Punjabi,1200,[],[],Dine-out,Gurgaon
+https://example.com/gu3,"Sohna Road, Gurgaon",Barbeque Nation,Yes,Yes,4.3/5,4100,0124-4000002,Sohna Road,Casual Dining,,North Indian/Continental,1200,[],[],Dine-out,Gurgaon
+https://example.com/gu4,"Golf Course Road, Gurgaon",Olive Bar and Kitchen,Yes,Yes,4.5/5,1900,0124-4000003,Golf Course Road,Fine Dining,,Continental/Mediterranean,3000,[],[],Dine-out,Gurgaon
+https://example.com/gu5,"Sector 29, Gurgaon",Whisky Samba,Yes,Yes,4.3/5,2100,0124-4000004,Sector 29,Bar,,Continental/North Indian,2500,[],[],Dine-out,Gurgaon
+https://example.com/j1,"MI Road, Jaipur",Laxmi Misthan Bhandar,No,No,4.5/5,6800,0141-2565844,MI Road,Casual Dining,,Rajasthani/North Indian,400,[],[],Dine-out,Jaipur
+https://example.com/j2,"C Scheme, Jaipur",Suvarna Mahal,Yes,Yes,4.6/5,1800,0141-2374343,C Scheme,Fine Dining,,Rajasthani/North Indian,3500,[],[],Dine-out,Jaipur
+https://example.com/j3,"Bapu Nagar, Jaipur",Chokhi Dhani,Yes,Yes,4.4/5,4200,0141-2770555,Bapu Nagar,Casual Dining,,Rajasthani,1200,[],[],Dine-out,Jaipur
+https://example.com/j4,"Vaishali Nagar, Jaipur",Handi Restaurant,Yes,No,4.3/5,2900,0141-2770556,Vaishali Nagar,Casual Dining,,North Indian/Mughlai,1000,[],[],Dine-out,Jaipur
+https://example.com/j5,"Pink City, Jaipur",Niro's,Yes,Yes,4.4/5,3600,0141-2374493,Pink City,Casual Dining,,North Indian/Continental,1500,[],[],Dine-out,Jaipur
+https://example.com/a1,"CG Road, Ahmedabad",Agashiye,Yes,Yes,4.5/5,3200,079-26560000,CG Road,Fine Dining,,Gujarati,1500,[],[],Dine-out,Ahmedabad
+https://example.com/a2,"Navrangpura, Ahmedabad",Gordhan Thal,Yes,No,4.4/5,5600,079-26560001,Navrangpura,Casual Dining,,Gujarati/Rajasthani,800,[],[],Dine-out,Ahmedabad
+https://example.com/a3,"Satellite, Ahmedabad",Zen,Yes,Yes,4.3/5,2100,079-26560002,Satellite,Casual Dining,,Chinese/Asian,1200,[],[],Dine-out,Ahmedabad
+https://example.com/a4,"Vastrapur, Ahmedabad",Honest,Yes,No,4.2/5,4800,079-26560003,Vastrapur,Casual Dining,,Fast Food/North Indian,400,[],[],Dine-out,Ahmedabad
+https://example.com/a5,"Prahlad Nagar, Ahmedabad",Rajwadu,Yes,Yes,4.4/5,2800,079-26560004,Prahlad Nagar,Casual Dining,,Gujarati/Rajasthani,1000,[],[],Dine-out,Ahmedabad
