@@ -16,6 +16,8 @@ This document decomposes the [problem statement](./problemStatement.md) into bui
 
 Phases **0** and **6** cover foundation and hardening so the core pipeline is testable and deployable.
 
+Phase **7** covers collaborative development workflow using GitHub.
+
 ---
 
 ## End-to-End View
@@ -161,7 +163,85 @@ flowchart LR
 
 ---
 
-## Phase Dependency Summary
+## Phase 7 — Collaborative Development with GitHub
+
+**Goal:** Establish a structured GitHub-based development workflow so the team can collaborate safely, track changes, and ship features without breaking the main branch.
+
+| Item | Description |
+|------|-------------|
+| **Repository setup** | Single repo with `main` as the protected production branch. All work happens on feature branches; no direct pushes to `main`. |
+| **Branching strategy** | Use `feature/<phase>-<short-description>` for new work (e.g. `feature/phase4-groq-retry`), `fix/<description>` for bug fixes, and `chore/<description>` for non-functional changes (docs, deps). |
+| **Commit conventions** | Follow Conventional Commits: `feat:`, `fix:`, `docs:`, `chore:`, `test:` prefixes. Keep messages under 72 characters in the subject line; use the body for context. |
+| **Pull requests** | Every change goes through a PR. PR title mirrors the commit convention. Description must include: what changed, how to test it, and any env variable additions. |
+| **Branch protection rules** | On GitHub → Settings → Branches: require PR review before merge, require status checks to pass (CI), disallow force-push on `main`. |
+| **CI with GitHub Actions** | On every PR: run `pip install -r requirements.txt`, lint with `ruff`, and execute `pytest tests/`. Frontend: `npm install && npm run lint && npm run build`. Blocks merge if any step fails. |
+| **Secrets management** | Store `GROQ_API_KEY`, `HF_TOKEN`, and any other secrets in GitHub → Settings → Secrets and Variables → Actions. Never commit `.env` (already in `.gitignore`). Reference in workflows as `${{ secrets.GROQ_API_KEY }}`. |
+| **Issue tracking** | Use GitHub Issues for bugs and feature requests. Link each PR to its issue with `Closes #<issue-number>` in the PR description for automatic closure on merge. |
+| **Releases & tags** | Tag stable milestones: `git tag v0.1.0` after Phase 4 is verified, `v0.2.0` after Phase 5 UI is polished. Push tags with `git push --tags`. Use GitHub Releases to attach release notes. |
+| **Deliverables** | `.github/workflows/ci.yml` for automated checks, branch protection enabled, at least one merged PR demonstrating the full workflow. |
+
+**Exit criteria:** No code reaches `main` without a passing CI run and at least one review. Any team member can clone the repo, copy `.env.example` to `.env`, and run the app in under 5 minutes.
+
+**Depends on:** Phase 6 (tests and observability must exist for CI to be meaningful).
+
+---
+
+### Recommended GitHub Actions CI workflow
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: pip install ruff pytest
+      - run: ruff check app/
+      - run: pytest tests/ -v
+        env:
+          ZOMATO_CSV_PATH: tests/fixtures/zomato_sample.csv
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+```
+
+### Branch naming quick reference
+
+| Type | Pattern | Example |
+|------|---------|---------|
+| New feature | `feature/<phase>-<desc>` | `feature/phase5-restaurant-card` |
+| Bug fix | `fix/<desc>` | `fix/phase3-cuisine-filter` |
+| Documentation | `docs/<desc>` | `docs/phase7-github-workflow` |
+| Dependency / chore | `chore/<desc>` | `chore/update-fastapi` |
+| Hotfix on main | `hotfix/<desc>` | `hotfix/groq-timeout` |
+
+---
 
 ```mermaid
 flowchart TB
@@ -172,6 +252,7 @@ flowchart TB
   P4[Phase 4: LLM]
   P5[Phase 5: Display]
   P6[Phase 6: Hardening]
+  P7[Phase 7: GitHub Workflow]
   P0 --> P1
   P0 --> P2
   P1 --> P3
@@ -179,6 +260,7 @@ flowchart TB
   P3 --> P4
   P4 --> P5
   P5 --> P6
+  P6 --> P7
 ```
 
 ---
