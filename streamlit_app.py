@@ -109,7 +109,7 @@ st.markdown("""
 from app.schemas import UserPreferences, BudgetBand
 from app.phase2 import PreferencesValidationError
 from app.phase4 import recommend
-from app.phase1 import load_catalog, catalog_summary
+from app.phase1 import catalog_summary
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -155,11 +155,21 @@ QUICK_SEARCHES = {
 
 def get_catalog():
     """Load catalog once per session via session_state.
+    Cache key includes the CSV path so it invalidates when the source changes.
     Avoids pickle incompatibility between Pydantic models and st.cache_resource on Python 3.9.
     """
-    if "catalog" not in st.session_state:
-        st.session_state["catalog"] = load_catalog()
-    return st.session_state["catalog"]
+    csv_path = os.environ.get("ZOMATO_CSV_PATH", "")
+    cache_key = f"catalog__{csv_path}"
+    if cache_key not in st.session_state:
+        # Clear any stale catalog from a previous CSV path
+        for k in list(st.session_state.keys()):
+            if k.startswith("catalog__"):
+                del st.session_state[k]
+        from app.phase1.catalog import clear_catalog_cache
+        clear_catalog_cache()
+        from app.phase1.catalog import load_catalog
+        st.session_state[cache_key] = load_catalog()
+    return st.session_state[cache_key]
 
 
 def star_rating(rating: float) -> str:
