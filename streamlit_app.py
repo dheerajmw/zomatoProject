@@ -129,10 +129,13 @@ QUICK_SEARCHES = {
 }
 
 
-@st.cache_resource(show_spinner="Loading restaurant catalog…")
 def get_catalog():
-    """Load catalog once and cache for the session."""
-    return load_catalog()
+    """Load catalog once per session via session_state.
+    Avoids pickle incompatibility between Pydantic models and st.cache_resource on Python 3.9.
+    """
+    if "catalog" not in st.session_state:
+        st.session_state["catalog"] = load_catalog()
+    return st.session_state["catalog"]
 
 
 def star_rating(rating: float) -> str:
