@@ -221,23 +221,26 @@ st.markdown("## 🍽️ AI-Powered Restaurant Recommendations")
 st.caption("Powered by Groq · llama-3.3-70b-versatile · Zomato dataset")
 st.divider()
 
-# Stats row
-try:
-    cat = get_catalog()
-    summary = catalog_summary(cat)
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        st.markdown(f'<div class="stat-box"><div class="stat-number">{summary.row_count:,}</div><div>Restaurants</div></div>', unsafe_allow_html=True)
-    with c2:
-        st.markdown(f'<div class="stat-box"><div class="stat-number">{summary.unique_cities}</div><div>Cities</div></div>', unsafe_allow_html=True)
-    with c3:
-        st.markdown(f'<div class="stat-box"><div class="stat-number">6</div><div>AI Phases</div></div>', unsafe_allow_html=True)
-    with c4:
-        st.markdown(f'<div class="stat-box"><div class="stat-number">100%</div><div>Grounded</div></div>', unsafe_allow_html=True)
-    st.divider()
-except Exception:
-    st.warning("Catalog not loaded yet — results will load on first search.")
-    cat = None
+# Stats row — load catalog once, show spinner on first load
+with st.spinner("Loading restaurant catalog…"):
+    try:
+        cat = get_catalog()
+        summary = catalog_summary(cat)
+    except Exception as e:
+        st.error(f"Failed to load catalog: {e}")
+        st.info("Make sure `GROQ_API_KEY` is set and the dataset is accessible.")
+        st.stop()
+
+c1, c2, c3, c4 = st.columns(4)
+with c1:
+    st.markdown(f'<div class="stat-box"><div class="stat-number">{summary.row_count:,}</div><div>Restaurants</div></div>', unsafe_allow_html=True)
+with c2:
+    st.markdown(f'<div class="stat-box"><div class="stat-number">{summary.unique_cities}</div><div>Cities</div></div>', unsafe_allow_html=True)
+with c3:
+    st.markdown(f'<div class="stat-box"><div class="stat-number">6</div><div>AI Phases</div></div>', unsafe_allow_html=True)
+with c4:
+    st.markdown(f'<div class="stat-box"><div class="stat-number">100%</div><div>Grounded</div></div>', unsafe_allow_html=True)
+st.divider()
 
 
 # ── Run recommendation ────────────────────────────────────────────────────────
