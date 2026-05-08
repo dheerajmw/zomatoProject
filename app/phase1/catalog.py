@@ -186,23 +186,33 @@ def _row_to_record(row: Mapping[str, Any], index: int) -> Optional[RestaurantRec
     )
 
 
+def _iter_csv_direct(csv_path: str) -> Iterator[Mapping[str, Any]]:
+    """Read a local CSV with stdlib csv — no HuggingFace, no pickle, no Arrow."""
+    import csv as _csv
+    with open(csv_path, newline="", encoding="utf-8") as fh:
+        reader = _csv.DictReader(fh)
+        for row in reader:
+            yield row
+
+
 def _iter_hf_dataset(csv_path_override: Optional[str] = None) -> Iterator[Mapping[str, Any]]:
-    """Load the configured Hugging Face dataset / local CSV (full pass for MVP)."""
+    """Load dataset rows.
+    - Local CSV path → plain csv.DictReader (no HuggingFace, avoids pickle issues on Python 3.9).
+    - No path → HuggingFace hub with streaming=True.
+    """
     csv_path = csv_path_override if csv_path_override is not None else settings.zomato_csv_path
-    cache_dir = _datasets_cache_dir()
     if csv_path:
-        ds = load_dataset(
-            "csv",
-            data_files=csv_path,
-            split="train",
-            cache_dir=cache_dir,
-        )
-    else:
-        ds = load_dataset(
-            settings.zomato_dataset_id,
-            split="train",
-            cache_dir=cache_dir,
-        )
+        yield from _iter_csv_direct(csv_path)
+        return
+
+    # HuggingFace hub path — streaming avoids full download and pickle caching
+    cache_dir = _datasets_cache_dir()
+    ds = load_dataset(
+        settings.zomato_dataset_id,
+        split="train",
+        streaming=True,
+        cache_dir=cache_dir,
+    )
     for row in ds:
         yield row
 
@@ -323,22 +333,21 @@ def get_source_column_names(csv_path_override: Optional[str] = None) -> list[str
         else settings.zomato_csv_path
     )
     if csv_path:
-        ds = load_dataset(
-            "csv",
-            data_files=csv_path,
-            split="train",
-            streaming=True,
-            cache_dir=cache_dir,
-        )
+        # Use stdlib csv to avoid HuggingFace pickle issues on Python 3.9
+        import csv as _csv
+        with open(csv_path, newline="", encoding="utf-8") as fh:
+            reader = _csv.DictReader(fh)
+            return list(reader.fieldnames or [])
     else:
+        cache_dir = _datasets_cache_dir()
         ds = load_dataset(
             settings.zomato_dataset_id,
             split="train",
             streaming=True,
             cache_dir=cache_dir,
         )
-    cols = getattr(ds, "column_names", None)
-    if cols:
-        return list(cols)
-    row = next(iter(ds))
-    return list(row.keys())
+        cols = getattr(ds, "column_names", None)
+        if cols:
+            return list(cols)
+        row = next(iter(ds))
+        return list(row.keys())
