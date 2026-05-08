@@ -7,7 +7,31 @@ Deploy on Streamlit Cloud: set GROQ_API_KEY in app secrets.
 from __future__ import annotations
 
 import os
+from pathlib import Path
 import streamlit as st
+
+# ── Inject Streamlit secrets into env BEFORE any app imports ─────────────────
+# This must happen before importing app modules so pydantic-settings picks them up.
+def _inject_secrets() -> None:
+    """Copy Streamlit secrets into os.environ so app/config.py sees them."""
+    try:
+        for key, value in st.secrets.items():
+            if isinstance(value, str):
+                os.environ.setdefault(key, value)
+    except Exception:
+        pass  # No secrets file locally — env vars already set
+
+_inject_secrets()
+
+# Point to the bundled sample CSV so we never hit HuggingFace on Streamlit Cloud.
+# Users can override by setting ZOMATO_CSV_PATH in secrets to a real dataset path.
+_SAMPLE_CSV = str(Path(__file__).parent / "tests" / "fixtures" / "delhi_sample.csv")
+if not os.environ.get("ZOMATO_CSV_PATH"):
+    os.environ["ZOMATO_CSV_PATH"] = _SAMPLE_CSV
+
+# Bust the lru_cache on settings so it re-reads the env vars we just set
+from app.config import get_settings
+get_settings.cache_clear()
 
 # ── Page config (must be first Streamlit call) ────────────────────────────────
 st.set_page_config(
