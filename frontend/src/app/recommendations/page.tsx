@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Restaurant, RecommendationResponse } from '@/types';
+import { Restaurant, RecommendationResponse, BudgetBand } from '@/types';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import RestaurantCard from '@/components/RestaurantCard';
@@ -8,7 +10,7 @@ import RestaurantAPI from '@/lib/api';
 export default function RecommendationsPage() {
   const [preferences, setPreferences] = useState({
     location: '',
-    budget: 'medium',
+    budget: BudgetBand.MEDIUM,
     cuisines: '',
     minimum_rating: 4.0,
     optional_tags: ''
@@ -48,10 +50,10 @@ export default function RecommendationsPage() {
   };
 
   const quickSearches = [
-    { name: 'Date Night', location: 'Delhi', budget: 'high', cuisines: 'Italian, Continental', rating: 4.5 },
-    { name: 'Family Dinner', location: 'Bangalore', budget: 'medium', cuisines: 'North Indian, Chinese', rating: 4.0 },
-    { name: 'Quick Lunch', location: 'Mumbai', budget: 'low', cuisines: 'Fast Food, South Indian', rating: 3.5 },
-    { name: 'Business Meeting', location: 'Gurgaon', budget: 'high', cuisines: 'Continental, Japanese', rating: 4.5 }
+    { name: 'Romantic Dinner', location: 'Bangalore', budget: BudgetBand.HIGH, cuisines: 'Italian, French', rating: 4.5 },
+    { name: 'Family Weekend', location: 'Delhi', budget: BudgetBand.MEDIUM, cuisines: 'North Indian, Chinese', rating: 4.0 },
+    { name: 'Quick Lunch', location: 'Mumbai', budget: BudgetBand.LOW, cuisines: 'Fast Food, South Indian', rating: 3.5 },
+    { name: 'Business Meeting', location: 'Gurgaon', budget: BudgetBand.HIGH, cuisines: 'Continental, Japanese', rating: 4.5 }
   ];
 
   const applyQuickSearch = (search: typeof quickSearches[0]) => {
@@ -190,7 +192,7 @@ export default function RecommendationsPage() {
                 Recommended Restaurants ({recommendations.recommendations.length})
               </h2>
               <div className="text-sm text-gray-600">
-                Powered by AI • Generated in {recommendations.processing_time_ms || 'N/A'}ms
+                Powered by AI • Personalized recommendations
               </div>
             </div>
 
@@ -210,9 +212,9 @@ export default function RecommendationsPage() {
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recommendations.recommendations.map((restaurant, index) => (
-                  <div key={restaurant.id || index} className="fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <RestaurantCard restaurant={restaurant} />
+                {recommendations.recommendations.map((item, index) => (
+                  <div key={index} className="fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <RestaurantCard restaurant={item.restaurant} />
                   </div>
                 ))}
               </div>
@@ -222,7 +224,7 @@ export default function RecommendationsPage() {
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-600">
-                    Found {recommendations.total_candidates || 'N/A'} total candidates, 
+                    Found {recommendations.recommendations.length} recommendations, 
                     showing top {recommendations.recommendations.length} recommendations
                   </div>
                   <Button 

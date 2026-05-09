@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import RestaurantCard from '@/components/RestaurantCard';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import { BudgetBand } from '@/types';
 
 export default function Home() {
   return (
@@ -12,13 +13,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <span className="text-2xl font-bold text-orange-600">🍽️ ForkFinder</span>
+              <span className="text-2xl font-bold text-primary-600">🍽️ ForkFinder</span>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/catalog" className="text-gray-700 dark:text-gray-300 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/catalog" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
                 Browse
               </Link>
-              <Link href="/recommendations" className="text-gray-700 dark:text-gray-300 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/recommendations" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
                 Recommendations
               </Link>
               <DarkModeToggle />
@@ -28,25 +29,25 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-orange-500 to-amber-600">
+      <div className="relative bg-gradient-to-r from-primary-500 to-warning-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Find Your Perfect
               <br />
-              <span className="text-orange-100">Dining Experience</span>
+              <span className="text-primary-100">Dining Experience</span>
             </h1>
-            <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
               AI-powered restaurant recommendations tailored to your taste, budget, and location
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/recommendations">
-                <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
+                <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
                   Get Recommendations
                 </Button>
               </Link>
               <Link href="/catalog">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 text-lg font-semibold">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600 px-8 py-3 text-lg font-semibold">
                   Explore Restaurants
                 </Button>
               </Link>
@@ -124,11 +125,10 @@ export default function Home() {
                   name: 'The Garden Terrace',
                   city: 'Bangalore',
                   cuisines: ['Continental', 'Italian'],
-                  cost_band: 'medium',
+                  cost_band: BudgetBand.MEDIUM,
                   rating: 4.5,
                   tags: ['romantic', 'outdoor-seating'],
-                  explanation: 'Perfect for romantic dinners with beautiful garden ambiance and exceptional Italian cuisine.'
-                }}
+                                  }}
               />
             </div>
             <div className="hover-lift">
@@ -138,11 +138,10 @@ export default function Home() {
                   name: 'Spice Garden',
                   city: 'Delhi',
                   cuisines: ['North Indian', 'Mughlai'],
-                  cost_band: 'medium',
+                  cost_band: BudgetBand.MEDIUM,
                   rating: 4.3,
                   tags: ['family-friendly', 'casual-dining'],
-                  explanation: 'Authentic North Indian flavors with a modern twist, great for family gatherings.'
-                }}
+                                  }}
               />
             </div>
             <div className="hover-lift">
@@ -152,11 +151,10 @@ export default function Home() {
                   name: 'Sushi Master',
                   city: 'Mumbai',
                   cuisines: ['Japanese', 'Sushi'],
-                  cost_band: 'high',
+                  cost_band: BudgetBand.HIGH,
                   rating: 4.8,
                   tags: ['fine-dining', 'sushi-bar'],
-                  explanation: 'Premium sushi experience with fresh ingredients and master chefs.'
-                }}
+                                  }}
               />
             </div>
           </div>

@@ -316,7 +316,8 @@
     box-shadow: 0 0 30px rgba(249, 115, 22, 0.8);
   }
 }
-  
+
+@layer components {
   .btn-ghost {
     @apply hover:bg-accent hover:text-accent-foreground;
   }

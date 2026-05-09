@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { MetricsSummary } from '@/types';
 import Button from '@/components/ui/Button';
