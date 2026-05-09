@@ -294,124 +294,152 @@ st.markdown("""
         letter-spacing: -0.025em !important;
     }
     
-    /* Dark Theme Support */
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%) !important;
-    }
-    
-    [data-theme="dark"] .stApp {
+    /* Dark Theme Support - Using Streamlit's dark theme classes */
+    .stApp.darkTheme {
         background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
     }
     
-    [data-theme="dark"] body {
+    .stApp.darkTheme body {
         background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
     }
     
-    [data-theme="dark"] .restaurant-card {
+    .stApp.darkTheme .restaurant-card {
         background: #2a2a2a !important;
         border: 1px solid #404040 !important;
         color: #ffffff !important;
     }
     
-    [data-theme="dark"] .restaurant-content {
+    .stApp.darkTheme .restaurant-content {
         color: #ffffff !important;
     }
     
-    [data-theme="dark"] .restaurant-header {
+    .stApp.darkTheme .restaurant-header {
         background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #dc2626 100%) !important;
     }
     
-    [data-theme="dark"] .cuisine-tag {
+    .stApp.darkTheme .cuisine-tag {
         background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%) !important;
         color: white !important;
         border: 1px solid #c2410c !important;
     }
     
-    [data-theme="dark"] .cuisine-tag:hover {
+    .stApp.darkTheme .cuisine-tag:hover {
         background: linear-gradient(135deg, #c2410c 0%, #b91c1c 100%) !important;
     }
     
-    [data-theme="dark"] .tag-pill {
+    .stApp.darkTheme .tag-pill {
         background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
         color: white !important;
         border: 1px solid #c2410c !important;
     }
     
-    [data-theme="dark"] .tag-pill:hover {
+    .stApp.darkTheme .tag-pill:hover {
         background: linear-gradient(135deg, #c2410c 0%, #b91c1c 100%) !important;
     }
     
-    [data-theme="dark"] .ai-explanation {
+    .stApp.darkTheme .ai-explanation {
         background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
         border-left: 4px solid #ea580c !important;
         color: #e5e5e5 !important;
     }
     
-    [data-theme="dark"] .stat-box {
+    .stApp.darkTheme .stat-box {
         background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #dc2626 100%) !important;
         color: white !important;
     }
     
-    [data-theme="dark"] .main-header {
+    .stApp.darkTheme .main-header {
         background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
     }
     
-    [data-theme="dark"] .stTextInput > div > div > input,
-    [data-theme="dark"] .stSelectbox > div > div > select,
-    [data-theme="dark"] .stSlider > div > div > div {
+    .stApp.darkTheme .stTextInput > div > div > input,
+    .stApp.darkTheme .stSelectbox > div > div > select,
+    .stApp.darkTheme .stSlider > div > div > div {
         background: #2a2a2a !important;
         color: #ffffff !important;
         border: 2px solid #404040 !important;
     }
     
-    [data-theme="dark"] .stTextInput > div > div > input:focus,
-    [data-theme="dark"] .stSelectbox > div > div > select:focus,
-    [data-theme="dark"] .stSlider > div > div > div:focus {
+    .stApp.darkTheme .stTextInput > div > div > input:focus,
+    .stApp.darkTheme .stSelectbox > div > div > select:focus,
+    .stApp.darkTheme .stSlider > div > div > div:focus {
         border-color: #ea580c !important;
         background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
     }
     
-    [data-theme="dark"] .stSidebar {
+    .stApp.darkTheme .stSidebar {
         background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
         border-right: 1px solid #404040 !important;
     }
     
-    [data-theme="dark"] .stSidebar .stMarkdown {
+    .stApp.darkTheme .stSidebar .stMarkdown {
         color: #ffffff !important;
     }
     
-    [data-theme="dark"] .stSidebar h1, 
-    [data-theme="dark"] .stSidebar h2, 
-    [data-theme="dark"] .stSidebar h3 {
+    .stApp.darkTheme .stSidebar h1, 
+    .stApp.darkTheme .stSidebar h2, 
+    .stApp.darkTheme .stSidebar h3 {
         color: #ffffff !important;
     }
     
-    [data-theme="dark"] .stMarkdown {
+    .stApp.darkTheme .stMarkdown {
         color: #e5e5e5 !important;
     }
     
-    [data-theme="dark"] h1, 
-    [data-theme="dark"] h2, 
-    [data-theme="dark"] h3,
-    [data-theme="dark"] h4,
-    [data-theme="dark"] h5,
-    [data-theme="dark"] h6 {
+    .stApp.darkTheme h1, 
+    .stApp.darkTheme h2, 
+    .stApp.darkTheme h3,
+    .stApp.darkTheme h4,
+    .stApp.darkTheme h5,
+    .stApp.darkTheme h6 {
         color: #ffffff !important;
     }
     
-    [data-theme="dark"] p, 
-    [data-theme="dark"] span, 
-    [data-theme="dark"] div {
+    .stApp.darkTheme p, 
+    .stApp.darkTheme span, 
+    .stApp.darkTheme div {
         color: #e5e5e5 !important;
     }
     
-    [data-theme="dark"] .stButton > button {
+    .stApp.darkTheme .stButton > button {
         background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
         color: white !important;
     }
     
-    [data-theme="dark"] .stButton > button:hover {
+    .stApp.darkTheme .stButton > button:hover {
         background: linear-gradient(135deg, #c2410c 0%, #b91c1c 100%) !important;
+    }
+    
+    /* Alternative dark theme detection */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .restaurant-card {
+        background: #2a2a2a !important;
+        border: 1px solid #404040 !important;
+        color: #ffffff !important;
+    }
+    
+    [data-testid="stAppViewContainer"][data-theme="dark"] .restaurant-content {
+        color: #ffffff !important;
+    }
+    
+    [data-testid="stAppViewContainer"][data-theme="dark"] .cuisine-tag {
+        background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%) !important;
+        color: white !important;
+        border: 1px solid #c2410c !important;
+    }
+    
+    [data-testid="stAppViewContainer"][data-theme="dark"] .tag-pill {
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
+        color: white !important;
+        border: 1px solid #c2410c !important;
+    }
+    
+    [data-testid="stAppViewContainer"][data-theme="dark"] .stSidebar {
+        background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+        border-right: 1px solid #404040 !important;
+    }
+    
+    [data-testid="stAppViewContainer"][data-theme="dark"] .stMarkdown {
+        color: #e5e5e5 !important;
     }
     
     .stRadio > div,
