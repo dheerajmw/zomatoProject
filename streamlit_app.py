@@ -701,24 +701,23 @@ def budget_display(band: BudgetBand) -> str:
         BudgetBand.high: "₹1,000+",
     }[band]
 
-
 # ── Main area ─────────────────────────────────────────────────────────────────
 
-# Enhanced ForkFinder Header
+# Enhanced ForkFinder Header - Dark Theme Friendly
 st.markdown("""
-<div style="text-align: center; padding: 1.5rem 0 1rem 0; margin-bottom: 0.5rem; background: linear-gradient(135deg, #fff7ed 0%, #ffffff 50%, #fee2e2 100%); border-radius: 20px; box-shadow: 0 8px 32px rgba(249, 115, 22, 0.15); position: relative; overflow: hidden;">
-    <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #f97316 0%, #ef4444 50%, #f97316 100%); animation: shimmer 2s ease-in-out infinite;"></div>
-    <div style="display: inline-block; animation: float 3s ease-in-out infinite;">
-        <div style="font-size: 3rem; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 8px rgba(249, 115, 22, 0.3)); animation: pulse 2s ease-in-out infinite;">🍽️</div>
+<div style="text-align: center; padding: 1.5rem 0 1rem 0; margin-bottom: 0.5rem; background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%); border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden; border: 1px solid #333333;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ea580c 0%, #dc2626 50%, #ea580c 100%); animation: shimmer 2s ease-in-out infinite;"></div>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+        <div style="font-size: 3rem; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 8px rgba(234, 88, 12, 0.5)); animation: pulse 2s ease-in-out infinite;">🍽️</div>
     </div>
-    <h1 style="background: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #f97316 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; font-weight: 900; margin: 0; text-shadow: 0 2px 4px rgba(249, 115, 22, 0.1); animation: glow 3s ease-in-out infinite;">
+    <h1 style="background: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #ea580c 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; font-weight: 900; margin: 0; text-shadow: 0 2px 4px rgba(234, 88, 12, 0.3); animation: glow 3s ease-in-out infinite;">
         ForkFinder
     </h1>
-    <p style="color: #6b7280; font-size: 1rem; margin: 0.5rem 0; font-weight: 500; letter-spacing: 0.5px;">
-        🤖 <span style="color: #f97316; font-weight: 600;">AI-Powered</span> Restaurant Discovery
+    <p style="color: #e5e5e5; font-size: 1rem; margin: 0.5rem 0; font-weight: 500; letter-spacing: 0.5px;">
+        🤖 <span style="color: #ea580c; font-weight: 600;">AI-Powered</span> Restaurant Discovery
     </p>
     <div style="margin-top: 0.75rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <span style="background: linear-gradient(135deg, #f97316 0%, #ef4444 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);">
+        <span style="background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);">
             🚀 Groq LLM
         </span>
         <span style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);">
