@@ -797,10 +797,9 @@ def budget_display(band: BudgetBand) -> str:
 
 # Enhanced ForkFinder Header - Dark Theme Friendly
 st.markdown("""
-<div style="text-align: center; padding: 1.5rem 0 1rem 0; margin-bottom: 0.5rem; background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%); border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden; border: 1px solid #333333;">
-    <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ea580c 0%, #dc2626 50%, #ea580c 100%); animation: shimmer 2s ease-in-out infinite;"></div>
+<div style="text-align: center; padding: 1.5rem 0 1rem 0; margin-bottom: 0.5rem; background: #000000; border-radius: 20px; position: relative; overflow: hidden;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
-        <div style="font-size: 3rem; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 8px rgba(234, 88, 12, 0.5)); animation: pulse 2s ease-in-out infinite;">🍽️</div>
+        <div style="font-size: 3rem; margin-bottom: 0.5rem; animation: pulse 2s ease-in-out infinite;">🍽️</div>
     </div>
     <h1 style="color: #ea580c; font-size: 2.5rem; font-weight: 900; margin: 0;">
         ForkFinder
