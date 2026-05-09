@@ -420,6 +420,100 @@ st.divider()
 
 # ── Run recommendation ────────────────────────────────────────────────────────
 
+# Show default recommendations on first load
+if not search_btn and quick == "— choose —" and 'initial_load' not in st.session_state:
+    st.session_state.initial_load = True
+    # Set default preferences for initial recommendations
+    default_location = "Bangalore"
+    default_budget = BudgetBand.medium
+    default_cuisines = ["North Indian", "Chinese"]
+    default_minimum_rating = 3.5
+    default_optional_tags = []
+    default_top_k = 6
+    
+    # Create default preferences
+    default_prefs = UserPreferences(
+        location=default_location,
+        budget=default_budget,
+        cuisines=default_cuisines,
+        minimum_rating=default_minimum_rating,
+        optional_tags=default_optional_tags,
+    )
+    
+    # Show loading message
+    with st.spinner(f"Loading top restaurants in {default_location}…"):
+        try:
+            default_result = recommend(
+                default_prefs,
+                candidate_cap=50,
+                top_k=default_top_k,
+                catalog=cat,
+            )
+            
+            # Display default recommendations
+            st.markdown(f"### 🌟 Top {len(default_result.recommendations)} Restaurants in {default_location}")
+            st.info("👋 Welcome! Here are some popular restaurants to get you started. Use the sidebar to customize your preferences.")
+            
+            # Display metrics
+            col_meta1, col_meta2, col_meta3 = st.columns(3)
+            col_meta1.metric("Results", len(default_result.recommendations))
+            col_meta2.metric("AI Ranked", "Yes" if default_result.llm_used else "No (fallback)")
+            col_meta3.metric("Budget Filter", budget_display(default_budget))
+            
+            if default_result.message:
+                st.info(f"ℹ️ {default_result.message}")
+            
+            st.divider()
+            
+            # Display restaurant cards
+            for item in default_result.recommendations:
+                r = item.restaurant
+                with st.container():
+                    # ForkFinder Restaurant Card using Streamlit components
+                    st.markdown(f"""
+                    <div class="restaurant-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <div>
+                                <span class="rank-badge">#{item.rank}</span>
+                                <h3 style="margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
+                                <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">📍 {r.city}</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 1.2rem; font-weight: 700; color: #f97316; margin-bottom: 0.25rem;">{star_rating(r.rating)}</div>
+                                <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
+                            </div>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # Cuisines section
+                    st.markdown("**🍴 Cuisines**")
+                    cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
+                    for i, cuisine in enumerate(r.cuisines[:3]):
+                        with cuisine_cols[i % 3]:
+                            st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
+                    
+                    # Features section
+                    if r.tags:
+                        st.markdown("**🏷️ Features**")
+                        feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
+                        for i, tag in enumerate(r.tags[:3]):
+                            with feature_cols[i % 3]:
+                                st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
+                    
+                    # AI explanation
+                    if item.explanation:
+                        st.markdown(f"""
+                        <div class="ai-explanation">
+                            🤖 {item.explanation}
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    st.divider()
+                    
+        except Exception as e:
+            st.error(f"Failed to load default recommendations: {e}")
+
 if search_btn or quick != "— choose —":
 
     # Validate inputs
