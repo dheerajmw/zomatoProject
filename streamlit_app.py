@@ -294,13 +294,31 @@ st.markdown("""
         letter-spacing: -0.025em !important;
     }
     
-    /* Dark Theme Support - Aggressive approach with universal selectors */
-    body[data-testid="stAppViewContainer"][data-theme="dark"],
-    .stApp.darkTheme,
-    .stApp[data-theme="dark"],
-    [data-theme="dark"] .stApp,
-    [data-theme="dark"] body,
-    [data-theme="dark"] html {
+    /* Dark Theme Support - Most aggressive approach */
+    html, body {
+        background: #000000 !important;
+        background-color: #000000 !important;
+    }
+    
+    .stApp, .stApp * {
+        background: #000000 !important;
+        background-color: #000000 !important;
+    }
+    
+    [data-testid="stAppViewContainer"],
+    [data-testid="stAppViewContainer"] * {
+        background: #000000 !important;
+        background-color: #000000 !important;
+    }
+    
+    /* Force black background for all elements */
+    * {
+        background: #000000 !important;
+        background-color: #000000 !important;
+    }
+    
+    /* Override any other background */
+    [style*="background"] {
         background: #000000 !important;
         background-color: #000000 !important;
     }
