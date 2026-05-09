@@ -264,6 +264,32 @@ st.markdown("""
         cursor: pointer !important;
     }
     
+    /* Preferences section styling */
+    .preferences-section {
+        background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.1);
+        border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+    
+    /* Two-column preferences layout */
+    .preferences-columns > div {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e5e7eb;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .preferences-columns > div:hover {
+        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.15);
+        transform: translateY(-2px);
+    }
+    
     /* Metric styling */
     .stMetric {
         background: white;
@@ -373,78 +399,6 @@ def budget_display(band: BudgetBand) -> str:
     }[band]
 
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
-
-with st.sidebar:
-    # ForkFinder Logo and Title
-    st.markdown("""
-    <div style="text-align: center; padding: 1rem;">
-        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🍽️</div>
-        <h1 style="color: #f97316; font-size: 1.8rem; font-weight: 800; margin: 0;">ForkFinder</h1>
-        <p style="color: #6b7280; font-size: 0.9rem; margin: 0.5rem 0;">AI-Powered Restaurant Discovery</p>
-    </div>
-    """, unsafe_allow_html=True)
-    st.divider()
-
-    # Quick search
-    st.subheader("⚡ Quick Search")
-    quick = st.selectbox(
-        "Pick a preset",
-        ["— choose —"] + list(QUICK_SEARCHES.keys()),
-        label_visibility="collapsed",
-    )
-
-    st.divider()
-
-    # Manual preferences
-    st.subheader("🎯 Your Preferences")
-
-    location = st.text_input(
-        "📍 Location",
-        placeholder="e.g. Delhi, Bangalore, Mumbai",
-        help="Enter any Indian city",
-    )
-
-    budget_label = st.radio(
-        "💰 Budget",
-        list(BUDGET_LABELS.values()),
-        index=1,
-    )
-    budget = BUDGET_FROM_LABEL[budget_label]
-
-    cuisines = st.multiselect(
-        "🍴 Cuisines  (pick at least one)",
-        CUISINE_OPTIONS,
-        help="Select one or more cuisines you prefer",
-    )
-
-    minimum_rating = st.slider(
-        "⭐ Minimum Rating",
-        min_value=0.0, max_value=5.0,
-        value=3.5, step=0.5,
-        help="Restaurants below this rating are excluded",
-    )
-
-    optional_tags = st.multiselect(
-        "🏷️ Optional Tags",
-        OPTIONAL_TAG_OPTIONS,
-    )
-
-    top_k = st.slider("🏆 Top results", min_value=1, max_value=10, value=5)
-
-    st.divider()
-    search_btn = st.button("🔍 Get Recommendations", use_container_width=True, type="primary")
-
-
-# ── Apply quick search preset ─────────────────────────────────────────────────
-if quick != "— choose —":
-    preset = QUICK_SEARCHES[quick]
-    location = preset["location"]
-    budget = preset["budget"]
-    cuisines = preset["cuisines"]
-    minimum_rating = preset["minimum_rating"]
-
-
 # ── Main area ─────────────────────────────────────────────────────────────────
 
 # ForkFinder Header
@@ -476,6 +430,92 @@ with c3:
 with c4:
     st.markdown(f'<div class="stat-box"><div class="stat-number">100%</div><div>Grounded</div></div>', unsafe_allow_html=True)
 st.divider()
+
+# ── Preferences Section (moved from sidebar) ───────────────────────────────────
+
+# Preferences Header with Logo
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.markdown("""
+    <div style="text-align: center; padding: 1rem; background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%); border-radius: 16px; margin-bottom: 1rem;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🍽️</div>
+        <h2 style="color: #f97316; font-size: 1.5rem; font-weight: 800; margin: 0;">ForkFinder Preferences</h2>
+        <p style="color: #6b7280; font-size: 0.9rem; margin: 0.5rem 0;">Customize your restaurant discovery</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Quick Search Section
+st.markdown("### ⚡ Quick Search")
+quick = st.selectbox(
+    "Pick a preset",
+    ["— choose —"] + list(QUICK_SEARCHES.keys()),
+    label_visibility="collapsed",
+    help="Choose a pre-configured preference set"
+)
+
+st.divider()
+
+# Manual Preferences in Columns
+st.markdown("### 🎯 Your Preferences")
+
+# Create two-column layout for better organization
+pref_col1, pref_col2 = st.columns(2)
+
+with pref_col1:
+    # Location Input
+    location = st.text_input(
+        "📍 Location",
+        placeholder="e.g. Delhi, Bangalore, Mumbai",
+        help="Enter any Indian city",
+    )
+    
+    # Budget Selection
+    budget_label = st.radio(
+        "💰 Budget",
+        list(BUDGET_LABELS.values()),
+        index=1,
+        help="Select your preferred price range"
+    )
+    budget = BUDGET_FROM_LABEL[budget_label]
+    
+    # Minimum Rating
+    minimum_rating = st.slider(
+        "⭐ Minimum Rating",
+        min_value=0.0, max_value=5.0,
+        value=3.5, step=0.5,
+        help="Restaurants below this rating are excluded",
+    )
+
+with pref_col2:
+    # Cuisine Selection
+    cuisines = st.multiselect(
+        "🍴 Cuisines (pick at least one)",
+        CUISINE_OPTIONS,
+        help="Select one or more cuisines you prefer",
+    )
+    
+    # Optional Tags
+    optional_tags = st.multiselect(
+        "🏷️ Optional Tags",
+        OPTIONAL_TAG_OPTIONS,
+        help="Filter by restaurant features"
+    )
+    
+    # Top Results
+    top_k = st.slider("🏆 Top results", min_value=1, max_value=10, value=5)
+
+# Search Button
+st.divider()
+search_btn = st.button("🔍 Get Recommendations", use_container_width=True, type="primary")
+
+
+# ── Apply quick search preset ─────────────────────────────────────────────────
+if quick != "— choose —":
+    preset = QUICK_SEARCHES[quick]
+    location = preset["location"]
+    budget = preset["budget"]
+    cuisines = preset["cuisines"]
+    minimum_rating = preset["minimum_rating"]
 
 
 # ── Run recommendation ────────────────────────────────────────────────────────
