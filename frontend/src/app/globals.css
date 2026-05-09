@@ -13,6 +13,11 @@
     line-height: 1.6;
     color: #1f2937;
   }
+  
+  .dark body {
+    color: #f9fafb;
+    background-color: #111827;
+  }
 }
 
 /* ForkFinder Custom Components */
@@ -43,6 +48,19 @@
   
   .forkfinder-input {
     @apply border-gray-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg;
+  }
+  
+  /* Dark theme styles */
+  .dark .forkfinder-card {
+    @apply bg-gray-800 border-gray-700;
+  }
+  
+  .dark .forkfinder-button-primary {
+    @apply from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700;
+  }
+  
+  .dark .forkfinder-input {
+    @apply border-gray-600 bg-gray-700 text-gray-100 focus:border-primary-400 focus:ring-primary-400;
   }
   
   .btn {

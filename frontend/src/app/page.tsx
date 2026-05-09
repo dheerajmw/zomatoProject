@@ -2,10 +2,15 @@ import React from 'react';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import RestaurantCard from '@/components/RestaurantCard';
+import DarkModeToggle from '@/components/DarkModeToggle';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      {/* Dark Mode Toggle */}
+      <div className="fixed top-4 right-4 z-50">
+        <DarkModeToggle />
+      </div>
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white">
         <div className="container mx-auto px-4 py-20">
@@ -35,9 +40,9 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
             Why Choose Our Recommendations?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -79,13 +84,13 @@ export default function Home() {
       </section>
 
       {/* Sample Recommendations */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Discover Amazing Restaurants
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Explore our curated selection of top-rated restaurants in your area
             </p>
           </div>

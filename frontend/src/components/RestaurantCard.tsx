@@ -9,7 +9,7 @@ interface RestaurantCardProps {
 
 export default function RestaurantCard({ restaurant, className = '' }: RestaurantCardProps) {
   return (
-    <div className={`bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 overflow-hidden ${className}`}>
+    <div className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 overflow-hidden ${className}`}>
       {/* Header with Rating */}
       <div className="bg-gradient-to-r from-primary-500 to-secondary-500 p-4">
         <div className="flex justify-between items-start">
