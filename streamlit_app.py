@@ -426,10 +426,10 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
     # Set default preferences for initial recommendations
     default_location = "Bangalore"
     default_budget = BudgetBand.medium
-    default_cuisines = ["North Indian", "Chinese"]
-    default_minimum_rating = 3.5
+    default_cuisines = ["North Indian", "Chinese", "Continental", "South Indian"]
+    default_minimum_rating = 3.0
     default_optional_tags = []
-    default_top_k = 6
+    default_top_k = 8
     
     # Create default preferences
     default_prefs = UserPreferences(
@@ -445,7 +445,7 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
         try:
             default_result = recommend(
                 default_prefs,
-                candidate_cap=50,
+                candidate_cap=100,
                 top_k=default_top_k,
                 catalog=cat,
             )
