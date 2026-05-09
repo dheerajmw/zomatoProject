@@ -323,6 +323,79 @@ st.markdown("""
         background-color: #000000 !important;
     }
     
+    /* Restaurant Cards - Dark Theme Improvements */
+    .restaurant-card {
+        background: #1a1a1a !important;
+        border: 1px solid #333333 !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .restaurant-card:hover {
+        box-shadow: 0 6px 24px rgba(234, 88, 12, 0.2) !important;
+        transform: translateY(-2px) !important;
+        border-color: #444444 !important;
+    }
+    
+    .restaurant-header {
+        background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+        border-bottom: 1px solid #333333 !important;
+    }
+    
+    .restaurant-content {
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+    
+    .restaurant-name {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+    }
+    
+    .restaurant-rating {
+        color: #ea580c !important;
+        font-weight: 500 !important;
+    }
+    
+    .restaurant-cost {
+        color: #e5e5e5 !important;
+        font-weight: 500 !important;
+    }
+    
+    .restaurant-address {
+        color: #a0a0a0 !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .cuisine-tag {
+        background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%) !important;
+        color: #ffffff !important;
+        border: 1px solid #444444 !important;
+    }
+    
+    .cuisine-tag:hover {
+        background: linear-gradient(135deg, #333333 0%, #404040 100%) !important;
+        border-color: #555555 !important;
+    }
+    
+    .tag-pill {
+        background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%) !important;
+        color: #ffffff !important;
+        border: 1px solid #444444 !important;
+    }
+    
+    .tag-pill:hover {
+        background: linear-gradient(135deg, #333333 0%, #404040 100%) !important;
+        border-color: #555555 !important;
+    }
+    
+    .ai-explanation {
+        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%) !important;
+        border-left: 4px solid #ea580c !important;
+        color: #e5e5e5 !important;
+        border: 1px solid #333333 !important;
+    }
+    
         
     /* Force dark background on all container elements */
     [data-theme="dark"] div,
