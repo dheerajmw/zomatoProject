@@ -294,53 +294,61 @@ st.markdown("""
         letter-spacing: -0.025em !important;
     }
     
-    /* Dark Theme Support - Using Streamlit's dark theme classes */
-    .stApp.darkTheme {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    /* Dark Theme Support - Aggressive approach with universal selectors */
+    body[data-testid="stAppViewContainer"][data-theme="dark"],
+    .stApp.darkTheme,
+    .stApp[data-theme="dark"],
+    [data-theme="dark"] .stApp,
+    [data-theme="dark"] body,
+    [data-theme="dark"] html {
+        background: #0f0f0f !important;
+        background-color: #0f0f0f !important;
     }
     
-    .stApp.darkTheme body {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    /* Force dark background on all container elements */
+    [data-theme="dark"] div,
+    [data-theme="dark"] main,
+    [data-theme="dark"] section,
+    [data-theme="dark"] [data-testid="stAppViewContainer"],
+    [data-theme="dark"] [data-testid="stAppViewContainer"] > div,
+    [data-theme="dark"] [data-testid="stAppViewContainer"] > div > div,
+    [data-theme="dark"] [data-testid="stAppViewContainer"] > div > div > div,
+    [data-theme="dark"] .main,
+    [data-theme="dark"] .element-container,
+    [data-theme="dark"] .block-container,
+    [data-theme="dark"] .stVerticalBlock,
+    [data-theme="dark"] .stHorizontalBlock {
+        background: transparent !important;
+        background-color: transparent !important;
     }
     
-    .stApp.darkTheme .main {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
-    }
-    
-    .stApp.darkTheme [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
-    }
-    
-    .stApp.darkTheme [data-testid="stAppViewContainer"] > div > div {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    /* Override any light backgrounds */
+    [data-theme="dark"] [style*="background"],
+    [data-theme="dark"] [style*="background-color"] {
+        background: #0f0f0f !important;
+        background-color: #0f0f0f !important;
     }
     
     /* Alternative dark theme detection */
-    [data-testid="stAppViewContainer"][data-theme="dark"] {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    .stApp.darkTheme,
+    .stApp.darkTheme body,
+    .stApp.darkTheme [data-testid="stAppViewContainer"],
+    .stApp.darkTheme [data-testid="stAppViewContainer"] > div,
+    .stApp.darkTheme [data-testid="stAppViewContainer"] > div > div {
+        background: #0f0f0f !important;
+        background-color: #0f0f0f !important;
     }
     
-    [data-testid="stAppViewContainer"][data-theme="dark"] .main {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
-    }
-    
-    [data-testid="stAppViewContainer"][data-theme="dark"] > div > div {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
-    }
-    
-    /* Force dark background for all Streamlit elements */
+    /* Force transparent for containers in dark theme */
+    .stApp.darkTheme div,
+    .stApp.darkTheme main,
+    .stApp.darkTheme section,
     .stApp.darkTheme .element-container,
     .stApp.darkTheme .block-container,
     .stApp.darkTheme .stVerticalBlock,
     .stApp.darkTheme .stHorizontalBlock {
         background: transparent !important;
-    }
-    
-    [data-testid="stAppViewContainer"][data-theme="dark"] .element-container,
-    [data-testid="stAppViewContainer"][data-theme="dark"] .block-container,
-    [data-testid="stAppViewContainer"][data-theme="dark"] .stVerticalBlock,
-    [data-testid="stAppViewContainer"][data-theme="dark"] .stHorizontalBlock {
-        background: transparent !important;
+        background-color: transparent !important;
     }
     
     .stApp.darkTheme .restaurant-card {
