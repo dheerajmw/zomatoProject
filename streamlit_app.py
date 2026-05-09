@@ -303,6 +303,46 @@ st.markdown("""
         background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
     }
     
+    .stApp.darkTheme .main {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    }
+    
+    .stApp.darkTheme [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    }
+    
+    .stApp.darkTheme [data-testid="stAppViewContainer"] > div > div {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    }
+    
+    /* Alternative dark theme detection */
+    [data-testid="stAppViewContainer"][data-theme="dark"] {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    }
+    
+    [data-testid="stAppViewContainer"][data-theme="dark"] .main {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    }
+    
+    [data-testid="stAppViewContainer"][data-theme="dark"] > div > div {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    }
+    
+    /* Force dark background for all Streamlit elements */
+    .stApp.darkTheme .element-container,
+    .stApp.darkTheme .block-container,
+    .stApp.darkTheme .stVerticalBlock,
+    .stApp.darkTheme .stHorizontalBlock {
+        background: transparent !important;
+    }
+    
+    [data-testid="stAppViewContainer"][data-theme="dark"] .element-container,
+    [data-testid="stAppViewContainer"][data-theme="dark"] .block-container,
+    [data-testid="stAppViewContainer"][data-theme="dark"] .stVerticalBlock,
+    [data-testid="stAppViewContainer"][data-theme="dark"] .stHorizontalBlock {
+        background: transparent !important;
+    }
+    
     .stApp.darkTheme .restaurant-card {
         background: #2a2a2a !important;
         border: 1px solid #404040 !important;
