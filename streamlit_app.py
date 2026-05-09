@@ -408,16 +408,15 @@ def budget_display(band: BudgetBand) -> str:
 
 # ── Main area ─────────────────────────────────────────────────────────────────
 
-# ForkFinder Header
+# Compact ForkFinder Header
 st.markdown("""
-<div class="main-header">
-    <h1>🍽️ ForkFinder</h1>
-    <p>Find Your Perfect Dining Experience with AI-Powered Recommendations</p>
-    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">Powered by Groq · llama-3.3-70b-versatile · Zomato dataset</p>
+<div style="text-align: center; padding: 1rem 0 0.5rem 0; margin-bottom: 0.5rem;">
+    <h1 style="color: #f97316; font-size: 2rem; font-weight: 800; margin: 0;">🍽️ ForkFinder</h1>
+    <p style="color: #6b7280; font-size: 0.95rem; margin: 0.25rem 0;">AI-Powered Restaurant Discovery</p>
 </div>
 """, unsafe_allow_html=True)
 
-# Stats row — load catalog once, show spinner on first load
+# Load catalog data quietly
 with st.spinner("Loading restaurant catalog…"):
     try:
         cat = get_catalog()
@@ -428,27 +427,27 @@ with st.spinner("Loading restaurant catalog…"):
         st.info("Make sure `GROQ_API_KEY` is set and the dataset is accessible.")
         st.stop()
 
-c1, c2, c3, c4 = st.columns(4)
-with c1:
-    st.markdown(f'<div class="stat-box"><div class="stat-number">{summary.row_count:,}</div><div>Restaurants</div></div>', unsafe_allow_html=True)
-with c2:
-    st.markdown(f'<div class="stat-box"><div class="stat-number">{summary.unique_cities}</div><div>Cities</div></div>', unsafe_allow_html=True)
-with c3:
-    st.markdown(f'<div class="stat-box"><div class="stat-number">6</div><div>AI Phases</div></div>', unsafe_allow_html=True)
-with c4:
-    st.markdown(f'<div class="stat-box"><div class="stat-number">100%</div><div>Grounded</div></div>', unsafe_allow_html=True)
-st.divider()
+# Compact stats row
+col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+with col1:
+    st.markdown(f'<div style="text-align: center; padding: 0.5rem; background: #f9fafb; border-radius: 8px; margin: 0.25rem;"><div style="font-size: 1.2rem; font-weight: 700; color: #f97316;">{summary.row_count:,}</div><div style="font-size: 0.8rem; color: #6b7280;">Restaurants</div></div>', unsafe_allow_html=True)
+with col2:
+    st.markdown(f'<div style="text-align: center; padding: 0.5rem; background: #f9fafb; border-radius: 8px; margin: 0.25rem;"><div style="font-size: 1.2rem; font-weight: 700; color: #f97316;">{summary.unique_cities}</div><div style="font-size: 0.8rem; color: #6b7280;">Cities</div></div>', unsafe_allow_html=True)
+with col3:
+    st.markdown(f'<div style="text-align: center; padding: 0.5rem; background: #f9fafb; border-radius: 8px; margin: 0.25rem;"><div style="font-size: 1.2rem; font-weight: 700; color: #f97316;">6</div><div style="font-size: 0.8rem; color: #6b7280;">AI Phases</div></div>', unsafe_allow_html=True)
+with col4:
+    st.markdown(f'<div style="text-align: center; padding: 0.5rem; background: #f9fafb; border-radius: 8px; margin: 0.25rem;"><div style="font-size: 1.2rem; font-weight: 700; color: #f97316;">100%</div><div style="font-size: 0.8rem; color: #6b7280;">Grounded</div></div>', unsafe_allow_html=True)
 
 # ── Preferences Section (moved from sidebar) ───────────────────────────────────
 
-# Preferences Header with Logo
+# Compact Preferences Header
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     st.markdown("""
-    <div style="text-align: center; padding: 1rem; background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%); border-radius: 16px; margin-bottom: 1rem;">
-        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🍽️</div>
-        <h2 style="color: #f97316; font-size: 1.5rem; font-weight: 800; margin: 0;">ForkFinder Preferences</h2>
-        <p style="color: #6b7280; font-size: 0.9rem; margin: 0.5rem 0;">Customize your restaurant discovery</p>
+    <div style="text-align: center; padding: 0.75rem; background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%); border-radius: 12px; margin-bottom: 0.75rem;">
+        <div style="font-size: 2rem; margin-bottom: 0.25rem;">🍽️</div>
+        <h2 style="color: #f97316; font-size: 1.3rem; font-weight: 800; margin: 0;">ForkFinder Preferences</h2>
+        <p style="color: #6b7280; font-size: 0.85rem; margin: 0.25rem 0;">Customize your restaurant discovery</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -460,8 +459,6 @@ quick = st.selectbox(
     label_visibility="collapsed",
     help="Choose a pre-configured preference set"
 )
-
-st.divider()
 
 # Manual Preferences in Columns
 st.markdown("### 🎯 Your Preferences")
@@ -522,7 +519,6 @@ with pref_col2:
     top_k = st.slider("🏆 Top results", min_value=1, max_value=10, value=5)
 
 # Search Button
-st.divider()
 search_btn = st.button("🔍 Get Recommendations", use_container_width=True, type="primary")
 
 
