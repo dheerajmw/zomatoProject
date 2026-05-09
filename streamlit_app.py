@@ -319,6 +319,39 @@ st.markdown("""
         background-color: #000000 !important;
     }
     
+    /* Light theme - white background - maximum specificity */
+    body[data-theme="light"],
+    html[data-theme="light"],
+    .stApp[data-theme="light"] {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Force white background for all elements in light theme */
+    body:not([data-theme="dark"]):not(.stApp),
+    html:not([data-theme="dark"]):not(.stApp),
+    .stApp:not([data-theme="dark"]) {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Override any non-white backgrounds in light theme */
+    body:not([data-theme="dark"]):not(.stApp) *,
+    html:not([data-theme="dark"]):not(.stApp) *,
+    .stApp:not([data-theme="dark"]) * {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Force white for specific containers in light theme */
+    body:not([data-theme="dark"]) .element-container,
+    body:not([data-theme="dark"]) .block-container,
+    body:not([data-theme="dark"]) .stVerticalBlock,
+    body:not([data-theme="dark"]) .stHorizontalBlock {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+    
     /* Restaurant Cards - Enhanced Dark Theme */
     .restaurant-card {
         background: #0a0a0a !important;
