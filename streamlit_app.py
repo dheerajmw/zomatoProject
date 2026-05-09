@@ -1345,7 +1345,7 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
                                             TOP PICK
                                         </span>
                                     </div>
-                                    <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: white; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">{r.name}</h3>
+                                    <h3 class="restaurant-name">{r.name}</h3>
                                     <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
                                         <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px rgba(16,185,129,0.5);"></div>
                                         <span style="color: rgba(255,255,255,0.8); font-size: 0.8rem; font-weight: 500;">VERIFIED RESTAURANT</span>
@@ -1463,7 +1463,7 @@ if search_btn or quick != "— choose —":
                                     TOP PICK
                                 </span>
                             </div>
-                            <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: white; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">{r.name}</h3>
+                            <h3 class="restaurant-name">{r.name}</h3>
                             <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
                                 <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px rgba(16,185,129,0.5);"></div>
                                 <span style="color: rgba(255,255,255,0.8); font-size: 0.8rem; font-weight: 500;">VERIFIED RESTAURANT</span>
