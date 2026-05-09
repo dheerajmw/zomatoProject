@@ -44,21 +44,42 @@ st.set_page_config(
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-    /* ForkFinder Theme - Orange/Red Gradient */
+    /* Import Enhanced Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+    
+    /* Enhanced ForkFinder Theme with Improved Color Palette */
+    body, .stApp {
+        font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%) !important;
+    }
+    
     .forkfinder-gradient {
-        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%) !important;
+    }
+    
+    .brand-gradient {
+        background: linear-gradient(135deg, #fde68a 0%, #f97316 50%, #d946ef 100%) !important;
+    }
+    
+    .accent-gradient {
+        background: linear-gradient(135deg, #14b8a6 0%, #22c55e 50%, #84cc16 100%) !important;
     }
     
     .rank-badge {
-        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%) !important;
         color: white;
-        padding: 6px 16px;
-        border-radius: 25px;
-        font-weight: bold;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: 700;
         font-size: 14px;
         display: inline-block;
         margin-bottom: 12px;
-        box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
     
     .restaurant-card {
@@ -77,7 +98,7 @@ st.markdown("""
     }
     
     .restaurant-header {
-        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%);
         padding: 1rem 1.5rem;
         position: relative;
     }
@@ -89,7 +110,8 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, #f97316 0%, #ef4444 50%, #f97316 100%);
+        background: linear-gradient(90deg, #f97316 0%, #d946ef 50%, #14b8a6 100%);
+        animation: shimmer 2s ease-in-out infinite;
     }
     
     .restaurant-content {
@@ -97,52 +119,88 @@ st.markdown("""
     }
     
     .cuisine-tag {
-        background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
-        color: #9a3412;
+        background: linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%);
+        color: #7c2d12;
         border: 1px solid #fb923c;
-        padding: 4px 12px;
+        padding: 6px 14px;
         border-radius: 20px;
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 600;
         margin-right: 8px;
         margin-bottom: 6px;
         display: inline-block;
+        font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif;
+        transition: all 0.3s ease;
+    }
+    
+    .cuisine-tag:hover {
+        background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+    }
+    
+    .tag-pill {
+        background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+        color: #134e4a;
+        border: 1px solid #14b8a6;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 4px;
+        display: inline-block;
+        font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif;
+        transition: all 0.3s ease;
+    }
+    
+    .tag-pill:hover {
+        background: linear-gradient(135deg, #99f6e4 0%, #5eead4 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
     }
     
     .ai-explanation {
-        background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+        background: linear-gradient(135deg, #fffdf7 0%, #fefbf0 100%);
         border-left: 4px solid #f97316;
-        padding: 12px 16px;
-        border-radius: 8px;
-        margin: 12px 0;
+        padding: 16px 20px;
+        border-radius: 12px;
+        margin: 16px 0;
         font-style: italic;
-        color: #374151;
+        color: #404040;
         font-size: 14px;
+        font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif;
+        box-shadow: 0 2px 8px rgba(249, 115, 22, 0.1);
     }
     
     .stat-box {
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
+        background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+        border-radius: 16px;
+        padding: 24px;
         text-align: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        border: 1px solid #e5e7eb;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        border: 1px solid #e5e5e5;
         transition: all 0.3s ease;
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
     }
     
     .stat-box:hover {
         box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
         transform: translateY(-2px);
+        background: linear-gradient(135deg, #ffffff 0%, #fef7ed 100%);
     }
     
     .stat-number {
         font-size: 2.5rem;
         font-weight: 800;
-        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         margin-bottom: 4px;
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+        animation: gradient-shift 3s ease infinite;
+        background-size: 200% 200%;
     }
     
     .tag-pill {
@@ -163,77 +221,90 @@ st.markdown("""
         background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
         padding: 2rem;
         border-radius: 16px;
-        color: white;
-        text-align: center;
-        margin-bottom: 2rem;
-        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
     }
     
-    .main-header h1 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        margin-bottom: 0.5rem;
+    /* Enhanced Animations */
+    @keyframes shimmer {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(100%);
+        }
     }
-    
-    .main-header p {
-        font-size: 1.1rem;
-        opacity: 0.9;
-        margin: 0;
+
+    @keyframes gradient-shift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
-    
-    /* Sidebar enhancements */
-    .sidebar-content {
-        background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%);
-        padding: 1rem;
-        border-radius: 12px;
-        margin-bottom: 1rem;
-    }
-    
-    /* Button styling */
+
+    /* Enhanced Interactive Elements */
     .stButton > button {
-        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 16px !important;
+        padding: 0.875rem 1.75rem !important;
+        font-weight: 600 !important;
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.3) !important;
+        font-size: 0.95rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
     }
-    
+
     .stButton > button:hover {
-        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        background: linear-gradient(135deg, #ea580c 0%, #c026d3 50%, #0d9488 100%) !important;
+        box-shadow: 0 6px 20px 0 rgba(249, 115, 22, 0.4) !important;
+        transform: translateY(-2px) !important;
     }
-    
-    /* Input styling */
+
     .stTextInput > div > div > input,
     .stSelectbox > div > div > select,
-    .stNumberInput > div > div > input,
-    .stTextArea > div > div > textarea {
-        border: 2px solid #e5e7eb;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        cursor: pointer;
+    .stSlider > div > div > div {
+        border: 2px solid #e5e5e5 !important;
+        border-radius: 16px !important;
+        padding: 0.875rem !important;
+        transition: all 0.3s ease !important;
+        background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%) !important;
+        font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif !important;
+        font-size: 0.95rem !important;
     }
-    
+
     .stTextInput > div > div > input:focus,
     .stSelectbox > div > div > select:focus,
-    .stNumberInput > div > div > input:focus,
-    .stTextArea > div > div > textarea:focus {
-        border-color: #f97316;
-        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
-        cursor: text;
+    .stSlider > div > div > div:focus {
+        border-color: #f97316 !important;
+        box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15) !important;
+        background: linear-gradient(135deg, #ffffff 0%, #fef7ed 100%) !important;
+    }
+
+    /* Enhanced Sidebar */
+    .stSidebar {
+        background: linear-gradient(135deg, #fffdf7 0%, #fefbf0 100%) !important;
+        border-right: 1px solid #e5e5e5 !important;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .stSidebar .stMarkdown {
+        color: #171717 !important;
+        font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif !important;
+    }
+
+    .stSidebar h1, .stSidebar h2, .stSidebar h3 {
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.025em !important;
     }
     
-    /* Dropdown and select cursor styling */
-    .stSelectbox > div > div > select,
-    .stMultiSelect > div > div > select,
-    .stSelectbox > div[data-testid="stSelectbox"] > div > div,
-    .stMultiSelect > div[data-testid="stMultiSelect"] > div > div {
-        cursor: pointer !important;
-    }
-    
-    /* Radio button and checkbox cursor styling */
     .stRadio > div,
     .stCheckbox > div {
         cursor: pointer;
