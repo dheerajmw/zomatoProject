@@ -490,10 +490,18 @@ with pref_col1:
     # Minimum Rating
     minimum_rating = st.slider(
         "⭐ Minimum Rating",
-        min_value=0.0, max_value=5.0,
-        value=3.5, step=0.5,
+        min_value=1.0, max_value=5.0,
+        value=3.5, step=0.1,
         help="Restaurants below this rating are excluded",
+        format="%.1f ⭐"
     )
+    
+    # Rating indicator
+    st.markdown(f"""
+    <div style="text-align: center; padding: 0.5rem; background: linear-gradient(90deg, #fee2e2 0%, #fef3c7 50%, #dcfce7 100%); border-radius: 8px; margin-top: 0.5rem;">
+        <span style="font-weight: 600; color: #374151;">Filtering for restaurants rated ⭐ {minimum_rating} and above</span>
+    </div>
+    """, unsafe_allow_html=True)
 
 with pref_col2:
     # Cuisine Selection
@@ -537,7 +545,7 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
     default_location = top_cities[0] if top_cities else "Bangalore"
     default_budget = BudgetBand.medium
     default_cuisines = ["North Indian", "Chinese", "Continental", "South Indian"]
-    default_minimum_rating = 3.0
+    default_minimum_rating = 3.5
     default_optional_tags = []
     default_top_k = 8
     

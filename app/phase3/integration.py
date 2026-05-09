@@ -40,8 +40,6 @@ def _matches_budget(record: RestaurantRecord, budget: BudgetBand) -> bool:
 
 
 def _matches_min_rating(record: RestaurantRecord, minimum_rating: float) -> bool:
-    # Debug rating filter
-    # print(f"Checking rating: {record.rating} >= {minimum_rating} = {record.rating >= minimum_rating}")
     return record.rating >= minimum_rating
 
 
@@ -87,36 +85,19 @@ def filter_catalog_phase3(
     rows = list(catalog) if catalog is not None else load_catalog()
     pre_count = len(rows)
 
-    # Debug: Print rating filter info
-    print(f"DEBUG: Filtering with minimum_rating={prefs.minimum_rating}")
-    rating_filtered_count = 0
-    location_filtered_count = 0
-    budget_filtered_count = 0
-    cuisine_filtered_count = 0
-    tag_filtered_count = 0
-
     filtered: list[RestaurantRecord] = []
     for r in rows:
         if not _matches_location(r, prefs.location):
-            location_filtered_count += 1
             continue
         if not _matches_budget(r, prefs.budget):
-            budget_filtered_count += 1
             continue
         if not _matches_min_rating(r, prefs.minimum_rating):
-            rating_filtered_count += 1
             continue
         if not _matches_any_cuisine(r, prefs.cuisines):
-            cuisine_filtered_count += 1
             continue
         if not _matches_optional_tags(r, prefs.optional_tags):
-            tag_filtered_count += 1
             continue
         filtered.append(r)
-    
-    # Debug: Print filtering results
-    print(f"DEBUG: Filtered {rating_filtered_count} by rating, {location_filtered_count} by location, {budget_filtered_count} by budget, {cuisine_filtered_count} by cuisine, {tag_filtered_count} by tags")
-    print(f"DEBUG: Remaining {len(filtered)} restaurants after all filters")
 
     filtered.sort(key=_stable_sort_key)
     post_count = len(filtered)
