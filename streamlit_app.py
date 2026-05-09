@@ -323,77 +323,96 @@ st.markdown("""
         background-color: #000000 !important;
     }
     
-    /* Restaurant Cards - Dark Theme Improvements */
+    /* Restaurant Cards - Enhanced Dark Theme */
     .restaurant-card {
-        background: #1a1a1a !important;
-        border: 1px solid #333333 !important;
+        background: #0a0a0a !important;
+        border: 1px solid #1a1a1a !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+        padding: 0 !important;
+        margin: 0.5rem 0 !important;
     }
     
     .restaurant-card:hover {
-        box-shadow: 0 6px 24px rgba(234, 88, 12, 0.2) !important;
-        transform: translateY(-2px) !important;
-        border-color: #444444 !important;
+        box-shadow: 0 4px 16px rgba(234, 88, 12, 0.15) !important;
+        transform: translateY(-1px) !important;
+        border-color: #ea580c !important;
+        background: #0f0f0f !important;
     }
     
     .restaurant-header {
-        background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
-        border-bottom: 1px solid #333333 !important;
+        background: #0f0f0f !important;
+        border-bottom: 1px solid #1a1a1a !important;
+        padding: 0.75rem !important;
     }
     
     .restaurant-content {
-        background: #1a1a1a !important;
+        background: #0a0a0a !important;
         color: #ffffff !important;
+        padding: 0.75rem !important;
     }
     
     .restaurant-name {
         color: #ffffff !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
     }
     
     .restaurant-rating {
         color: #ea580c !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
+        margin: 0.25rem 0 !important;
     }
     
     .restaurant-cost {
-        color: #e5e5e5 !important;
+        color: #d4d4d8 !important;
         font-weight: 500 !important;
+        margin: 0.25rem 0 !important;
     }
     
     .restaurant-address {
-        color: #a0a0a0 !important;
-        font-size: 0.9rem !important;
+        color: #888888 !important;
+        font-size: 0.85rem !important;
+        margin: 0.5rem 0 0 !important;
     }
     
     .cuisine-tag {
-        background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%) !important;
+        background: #ea580c !important;
         color: #ffffff !important;
-        border: 1px solid #444444 !important;
+        border: none !important;
+        padding: 0.25rem 0.5rem !important;
+        margin: 0.125rem !important;
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
     }
     
     .cuisine-tag:hover {
-        background: linear-gradient(135deg, #333333 0%, #404040 100%) !important;
-        border-color: #555555 !important;
+        background: #dc2626 !important;
+        transform: scale(1.05) !important;
     }
     
     .tag-pill {
-        background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%) !important;
+        background: #1a1a1a !important;
         color: #ffffff !important;
-        border: 1px solid #444444 !important;
+        border: 1px solid #333333 !important;
+        padding: 0.25rem 0.5rem !important;
+        margin: 0.125rem !important;
+        font-size: 0.75rem !important;
+        font-weight: 500 !important;
     }
     
     .tag-pill:hover {
-        background: linear-gradient(135deg, #333333 0%, #404040 100%) !important;
-        border-color: #555555 !important;
+        background: #2a2a2a !important;
+        border-color: #ea580c !important;
     }
     
     .ai-explanation {
-        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%) !important;
-        border-left: 4px solid #ea580c !important;
+        background: #0f0f0f !important;
+        border-left: 3px solid #ea580c !important;
         color: #e5e5e5 !important;
-        border: 1px solid #333333 !important;
+        border: 1px solid #1a1a1a !important;
+        padding: 1rem !important;
+        margin: 0.5rem 0 !important;
     }
     
         
