@@ -56,7 +56,7 @@ st.markdown("""
     }
     
     .forkfinder-gradient {
-        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%) !important;
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
     }
     
     .brand-gradient {
@@ -68,18 +68,15 @@ st.markdown("""
     }
     
     .rank-badge {
-        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%) !important;
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
         color: white;
-        padding: 8px 20px;
-        border-radius: 20px;
-        font-weight: 700;
+        padding: 6px 16px;
+        border-radius: 25px;
+        font-weight: bold;
         font-size: 14px;
         display: inline-block;
         margin-bottom: 12px;
-        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
-        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        box-shadow: 0 2px 8px rgba(234, 88, 12, 0.4);
     }
     
     .restaurant-card {
@@ -98,7 +95,7 @@ st.markdown("""
     }
     
     .restaurant-header {
-        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%);
+        background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #dc2626 100%);
         padding: 1rem 1.5rem;
         position: relative;
     }
@@ -110,7 +107,7 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, #f97316 0%, #d946ef 50%, #14b8a6 100%);
+        background: linear-gradient(90deg, #ea580c 0%, #c2410c 50%, #dc2626 100%);
         animation: shimmer 2s ease-in-out infinite;
     }
     
@@ -174,51 +171,32 @@ st.markdown("""
     }
     
     .stat-box {
-        background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-        border-radius: 16px;
-        padding: 24px;
+        background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #dc2626 100%);
+        color: white;
+        padding: 1rem;
+        border-radius: 12px;
         text-align: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        border: 1px solid #e5e5e5;
-        transition: all 0.3s ease;
-        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
-    }
-    
-    .stat-box:hover {
-        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
-        transform: translateY(-2px);
-        background: linear-gradient(135deg, #ffffff 0%, #fef7ed 100%);
+        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4);
     }
     
     .stat-number {
-        font-size: 2.5rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%);
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+        animation: gradient-shift 3s ease infinite;
+        background-size: 200% 200%;
+        background: linear-gradient(135deg, #ffffff 0%, #fed7aa 50%, #fbbf24 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin-bottom: 4px;
-        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
         animation: gradient-shift 3s ease infinite;
         background-size: 200% 200%;
     }
     
-    .tag-pill {
-        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-        color: #dc2626;
-        padding: 3px 10px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 500;
-        margin-right: 4px;
-        margin-bottom: 4px;
-        display: inline-block;
-        border: 1px solid #f87171;
-    }
-    
     /* Header styling */
     .main-header {
-        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
         padding: 2rem;
         border-radius: 16px;
     }
@@ -246,24 +224,35 @@ st.markdown("""
     }
 
     /* Enhanced Interactive Elements */
-    .stButton > button {
-        background: linear-gradient(135deg, #f97316 0%, #d946ef 50%, #14b8a6 100%) !important;
-        color: white !important;
+    [data-testid="stButton"] > button[kind="primary"] {
+        background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #dc2626 100%) !important;
         border: none !important;
-        border-radius: 16px !important;
-        padding: 0.875rem 1.75rem !important;
+        color: white !important;
         font-weight: 600 !important;
-        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif !important;
+        border-radius: 8px !important;
         transition: all 0.3s ease !important;
-        box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.3) !important;
-        font-size: 0.95rem !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.5px !important;
+        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4) !important;
     }
-
+    
+    [data-testid="stButton"] > button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #c2410c 0%, #b91c1c 50%, #991b1b 100%) !important;
+        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.5) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    .stButton > button {
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
     .stButton > button:hover {
-        background: linear-gradient(135deg, #ea580c 0%, #c026d3 50%, #0d9488 100%) !important;
-        box-shadow: 0 6px 20px 0 rgba(249, 115, 22, 0.4) !important;
+        background: linear-gradient(135deg, #c2410c 0%, #b91c1c 100%) !important;
+        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.5) !important;
         transform: translateY(-2px) !important;
     }
 
@@ -282,9 +271,9 @@ st.markdown("""
     .stTextInput > div > div > input:focus,
     .stSelectbox > div > div > select:focus,
     .stSlider > div > div > div:focus {
-        border-color: #f97316 !important;
-        box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15) !important;
-        background: linear-gradient(135deg, #ffffff 0%, #fef7ed 100%) !important;
+        border-color: #ea580c !important;
+        box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.15) !important;
+        background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%) !important;
     }
 
     /* Enhanced Sidebar */
