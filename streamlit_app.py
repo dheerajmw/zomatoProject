@@ -323,6 +323,77 @@ st.markdown("""
         background-color: #000000 !important;
     }
     
+    /* Dark theme text colors */
+    * {
+        color: #ffffff !important;
+    }
+    
+    /* Specific text color adjustments */
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+    }
+    
+    p, span, div {
+        color: #e5e5e5 !important;
+    }
+    
+    /* Make specific elements have proper backgrounds */
+    .restaurant-card {
+        background: #1a1a1a !important;
+        border: 1px solid #333333 !important;
+        color: #ffffff !important;
+    }
+    
+    .stat-box {
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+    
+    .ai-explanation {
+        background: #1a1a1a !important;
+        border-left: 4px solid #ea580c !important;
+        color: #e5e5e5 !important;
+    }
+    
+    .cuisine-tag {
+        background: #2a2a2a !important;
+        color: #ffffff !important;
+        border: 1px solid #444444 !important;
+    }
+    
+    .tag-pill {
+        background: #2a2a2a !important;
+        color: #ffffff !important;
+        border: 1px solid #444444 !important;
+    }
+    
+    /* Sidebar adjustments */
+    .stSidebar {
+        background: #1a1a1a !important;
+        border-right: 1px solid #333333 !important;
+    }
+    
+    .stSidebar * {
+        color: #ffffff !important;
+    }
+    
+    /* Input field adjustments */
+    .stTextInput > div > div > input,
+    .stSelectbox > div > div > select,
+    .stSlider > div > div > div {
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+        border: 2px solid #444444 !important;
+    }
+    
+    /* Button adjustments */
+    .stButton > button {
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
+        color: white !important;
+        border: none !important;
+    }
+    
     /* Force dark background on all container elements */
     [data-theme="dark"] div,
     [data-theme="dark"] main,
