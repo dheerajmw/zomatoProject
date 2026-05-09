@@ -630,17 +630,6 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
             for item in default_result.recommendations:
                 r = item.restaurant
                 with st.container():
-                    # Generate cuisine tags HTML
-                    cuisine_tags_html = ""
-                    for cuisine in r.cuisines[:3]:
-                        cuisine_tags_html += f'<span class="cuisine-tag">{cuisine}</span> '
-                    
-                    # Generate feature tags HTML
-                    feature_tags_html = ""
-                    if r.tags:
-                        for tag in r.tags[:3]:
-                            feature_tags_html += f'<span class="tag-pill">{tag}</span> '
-                    
                     # ForkFinder Restaurant Card using Streamlit components
                     st.markdown(f"""
                     <div class="restaurant-card">
@@ -658,25 +647,24 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
                         </div>
                         <div class="restaurant-content">
                             <p style="margin: 0 0 1rem 0; color: #6b7280; font-size: 0.9rem; font-weight: 500;">📍 {r.city}</p>
-                            
-                            <div style="margin-bottom: 1rem;">
-                                <strong style="color: #374151; font-size: 0.9rem;">🍴 Cuisines</strong>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                {cuisine_tags_html}
-                            </div>
-                            
-                            {f'''
-                            <div style="margin-bottom: 1rem;">
-                                <strong style="color: #374151; font-size: 0.9rem;">🏷️ Features</strong>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                {feature_tags_html}
-                            </div>
-                            ''' if r.tags else ''}
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
+                    
+                    # Cuisines section
+                    st.markdown("**🍴 Cuisines**")
+                    cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
+                    for i, cuisine in enumerate(r.cuisines[:3]):
+                        with cuisine_cols[i % 3]:
+                            st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
+                    
+                    # Features section
+                    if r.tags:
+                        st.markdown("**🏷️ Features**")
+                        feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
+                        for i, tag in enumerate(r.tags[:3]):
+                            with feature_cols[i % 3]:
+                                st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
                     
                     # AI explanation
                     if item.explanation:
@@ -748,17 +736,6 @@ if search_btn or quick != "— choose —":
         r = item.restaurant
 
         with st.container():
-            # Generate cuisine tags HTML
-            cuisine_tags_html = ""
-            for cuisine in r.cuisines[:3]:
-                cuisine_tags_html += f'<span class="cuisine-tag">{cuisine}</span> '
-            
-            # Generate feature tags HTML
-            feature_tags_html = ""
-            if r.tags:
-                for tag in r.tags[:3]:
-                    feature_tags_html += f'<span class="tag-pill">{tag}</span> '
-            
             # ForkFinder Restaurant Card using Streamlit components
             st.markdown(f"""
             <div class="restaurant-card">
@@ -776,25 +753,24 @@ if search_btn or quick != "— choose —":
                 </div>
                 <div class="restaurant-content">
                     <p style="margin: 0 0 1rem 0; color: #6b7280; font-size: 0.9rem; font-weight: 500;">📍 {r.city}</p>
-                    
-                    <div style="margin-bottom: 1rem;">
-                        <strong style="color: #374151; font-size: 0.9rem;">🍴 Cuisines</strong>
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        {cuisine_tags_html}
-                    </div>
-                    
-                    {f'''
-                    <div style="margin-bottom: 1rem;">
-                        <strong style="color: #374151; font-size: 0.9rem;">🏷️ Features</strong>
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        {feature_tags_html}
-                    </div>
-                    ''' if r.tags else ''}
                 </div>
             </div>
             """, unsafe_allow_html=True)
+            
+            # Cuisines section
+            st.markdown("**🍴 Cuisines**")
+            cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
+            for i, cuisine in enumerate(r.cuisines[:3]):
+                with cuisine_cols[i % 3]:
+                    st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
+            
+            # Features section
+            if r.tags:
+                st.markdown("**🏷️ Features**")
+                feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
+                for i, tag in enumerate(r.tags[:3]):
+                    with feature_cols[i % 3]:
+                        st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
             
             # AI explanation
             if item.explanation:
