@@ -90,8 +90,8 @@ st.markdown("""
         overflow: hidden;
     }
     
-    /* Light theme specific restaurant card styling */
-    [data-theme="light"] .restaurant-card {
+    /* Enhanced Restaurant Cards - Theme Support */
+    .restaurant-card {
         background: white;
         border: 1px solid #e5e7eb;
         border-radius: 12px;
@@ -101,27 +101,162 @@ st.markdown("""
         overflow: hidden;
     }
     
-    /* Dark theme specific restaurant card styling */
-    [data-theme="dark"] .restaurant-card {
-        background: #0a0a0a;
-        border: 1px solid #1a1a1a;
+    /* Light theme specific restaurant card styling */
+    [data-theme="light"] .restaurant-card {
+        background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+        border: 1px solid #f3f4f6;
         border-radius: 12px;
         margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
         transition: all 0.3s ease;
         overflow: hidden;
+        position: relative;
+    }
+    
+    [data-theme="light"] .restaurant-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #ea580c 0%, #dc2626 50%, #ea580c 100%);
+        background-size: 200% 100%;
+        animation: shimmer 3s ease-in-out infinite;
+    }
+    
+    /* Dark theme specific restaurant card styling */
+    [data-theme="dark"] .restaurant-card {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.6);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    [data-theme="dark"] .restaurant-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #ea580c 0%, #dc2626 50%, #ea580c 100%);
+        background-size: 200% 100%;
+        animation: shimmer 3s ease-in-out infinite;
     }
     
     /* Light theme restaurant name color */
     [data-theme="light"] .restaurant-name {
         color: #1f2937;
-        font-weight: 600;
+        font-weight: 700;
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
     }
     
     /* Dark theme restaurant name color */
     [data-theme="dark"] .restaurant-name {
         color: #ffffff;
+        font-weight: 700;
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Light theme restaurant rating color */
+    [data-theme="light"] .restaurant-rating {
+        color: #ea580c;
         font-weight: 600;
+        font-size: 0.875rem;
+    }
+    
+    /* Dark theme restaurant rating color */
+    [data-theme="dark"] .restaurant-rating {
+        color: #ea580c;
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+    
+    /* Light theme restaurant cost color */
+    [data-theme="light"] .restaurant-cost {
+        color: #6b7280;
+        font-weight: 500;
+        font-size: 0.875rem;
+    }
+    
+    /* Dark theme restaurant cost color */
+    [data-theme="dark"] .restaurant-cost {
+        color: #9ca3af;
+        font-weight: 500;
+        font-size: 0.875rem;
+    }
+    
+    /* Light theme restaurant address color */
+    [data-theme="light"] .restaurant-address {
+        color: #6b7280;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
+    
+    /* Dark theme restaurant address color */
+    [data-theme="dark"] .restaurant-address {
+        color: #9ca3af;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
+    
+    /* Light theme cuisine tags */
+    [data-theme="light"] .cuisine-tag {
+        background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+        color: #92400e;
+        border: 1px solid #fbbf24;
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin: 0.125rem;
+        display: inline-block;
+    }
+    
+    /* Dark theme cuisine tags */
+    [data-theme="dark"] .cuisine-tag {
+        background: linear-gradient(135deg, #451a03 0%, #78350f 100%);
+        color: #fed7aa;
+        border: 1px solid #92400e;
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin: 0.125rem;
+        display: inline-block;
+    }
+    
+    /* Light theme feature tags */
+    [data-theme="light"] .feature-tag {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        color: #1e40af;
+        border: 1px solid #3b82f6;
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin: 0.125rem;
+        display: inline-block;
+    }
+    
+    /* Dark theme feature tags */
+    [data-theme="dark"] .feature-tag {
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        color: #bfdbfe;
+        border: 1px solid #3b82f6;
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin: 0.125rem;
+        display: inline-block;
     }
     
     .restaurant-card:hover {
