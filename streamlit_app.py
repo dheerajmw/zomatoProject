@@ -301,8 +301,8 @@ st.markdown("""
     [data-theme="dark"] .stApp,
     [data-theme="dark"] body,
     [data-theme="dark"] html {
-        background: #0f0f0f !important;
-        background-color: #0f0f0f !important;
+        background: #000000 !important;
+        background-color: #000000 !important;
     }
     
     /* Force dark background on all container elements */
@@ -325,8 +325,8 @@ st.markdown("""
     /* Override any light backgrounds */
     [data-theme="dark"] [style*="background"],
     [data-theme="dark"] [style*="background-color"] {
-        background: #0f0f0f !important;
-        background-color: #0f0f0f !important;
+        background: #000000 !important;
+        background-color: #000000 !important;
     }
     
     /* Alternative dark theme detection */
@@ -335,8 +335,8 @@ st.markdown("""
     .stApp.darkTheme [data-testid="stAppViewContainer"],
     .stApp.darkTheme [data-testid="stAppViewContainer"] > div,
     .stApp.darkTheme [data-testid="stAppViewContainer"] > div > div {
-        background: #0f0f0f !important;
-        background-color: #0f0f0f !important;
+        background: #000000 !important;
+        background-color: #000000 !important;
     }
     
     /* Force transparent for containers in dark theme */
