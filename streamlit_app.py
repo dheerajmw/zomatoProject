@@ -52,7 +52,7 @@ st.markdown("""
         font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif !important;
         -webkit-font-smoothing: antialiased !important;
         -moz-osx-font-smoothing: grayscale !important;
-        background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%) !important;
+        background: #ffffff !important;
     }
     
     .forkfinder-gradient {
