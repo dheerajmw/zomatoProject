@@ -386,6 +386,13 @@ def get_catalog():
         st.session_state[cache_key] = load_catalog()
     return st.session_state[cache_key]
 
+def get_top_cities(catalog, limit=8):
+    """Get top cities by restaurant count."""
+    from collections import Counter
+    city_counts = Counter(restaurant.city for restaurant in catalog)
+    top_cities = city_counts.most_common(limit)
+    return [city for city, count in top_cities]
+
 def star_rating(rating: float) -> str:
     full = int(rating)
     return "⭐" * full + f"  **{rating}**"
@@ -415,6 +422,7 @@ with st.spinner("Loading restaurant catalog…"):
     try:
         cat = get_catalog()
         summary = catalog_summary(cat)
+        top_cities = get_top_cities(cat, 8)
     except Exception as e:
         st.error(f"Failed to load catalog: {e}")
         st.info("Make sure `GROQ_API_KEY` is set and the dataset is accessible.")
@@ -462,11 +470,12 @@ st.markdown("### 🎯 Your Preferences")
 pref_col1, pref_col2 = st.columns(2)
 
 with pref_col1:
-    # Location Input
-    location = st.text_input(
+    # Location Dropdown
+    location = st.selectbox(
         "📍 Location",
-        placeholder="e.g. Delhi, Bangalore, Mumbai",
-        help="Enter any Indian city",
+        top_cities,
+        help="Select from top cities by restaurant count",
+        index=0  # Default to first city
     )
     
     # Budget Selection
@@ -512,7 +521,8 @@ search_btn = st.button("🔍 Get Recommendations", use_container_width=True, typ
 # ── Apply quick search preset ─────────────────────────────────────────────────
 if quick != "— choose —":
     preset = QUICK_SEARCHES[quick]
-    location = preset["location"]
+    # Use preset location if it's in top cities, otherwise use first top city
+    location = preset["location"] if preset["location"] in top_cities else (top_cities[0] if top_cities else "Bangalore")
     budget = preset["budget"]
     cuisines = preset["cuisines"]
     minimum_rating = preset["minimum_rating"]
@@ -524,7 +534,7 @@ if quick != "— choose —":
 if not search_btn and quick == "— choose —" and 'initial_load' not in st.session_state:
     st.session_state.initial_load = True
     # Set default preferences for initial recommendations
-    default_location = "Bangalore"
+    default_location = top_cities[0] if top_cities else "Bangalore"
     default_budget = BudgetBand.medium
     default_cuisines = ["North Indian", "Chinese", "Continental", "South Indian"]
     default_minimum_rating = 3.0
