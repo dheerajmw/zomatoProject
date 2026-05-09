@@ -79,6 +79,7 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(234, 88, 12, 0.4);
     }
     
+    /* Restaurant Cards - Theme Support */
     .restaurant-card {
         background: white;
         border: 1px solid #e5e7eb;
@@ -87,6 +88,40 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         transition: all 0.3s ease;
         overflow: hidden;
+    }
+    
+    /* Light theme specific restaurant card styling */
+    [data-theme="light"] .restaurant-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+    
+    /* Dark theme specific restaurant card styling */
+    [data-theme="dark"] .restaurant-card {
+        background: #0a0a0a;
+        border: 1px solid #1a1a1a;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+    
+    /* Light theme restaurant name color */
+    [data-theme="light"] .restaurant-name {
+        color: #1f2937;
+        font-weight: 600;
+    }
+    
+    /* Dark theme restaurant name color */
+    [data-theme="dark"] .restaurant-name {
+        color: #ffffff;
+        font-weight: 600;
     }
     
     .restaurant-card:hover {
