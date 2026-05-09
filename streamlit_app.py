@@ -64,40 +64,40 @@ st.markdown("""
     .restaurant-card {
         background: white;
         border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         transition: all 0.3s ease;
     }
     
     .restaurant-card:hover {
-        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.12);
-        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
+        transform: translateY(-2px);
     }
     
     .cuisine-tag {
         background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
         color: #9a3412;
         border: 1px solid #fb923c;
-        padding: 2px 8px;
-        border-radius: 16px;
-        font-size: 11px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
         font-weight: 500;
-        margin-right: 6px;
-        margin-bottom: 4px;
+        margin-right: 8px;
+        margin-bottom: 6px;
         display: inline-block;
     }
     
     .ai-explanation {
         background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
-        border-left: 3px solid #f97316;
-        padding: 8px 12px;
-        border-radius: 6px;
-        margin: 8px 0;
+        border-left: 4px solid #f97316;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin: 12px 0;
         font-style: italic;
         color: #374151;
-        font-size: 13px;
+        font-size: 14px;
     }
     
     .stat-box {
@@ -613,37 +613,34 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
                     # ForkFinder Restaurant Card using Streamlit components
                     st.markdown(f"""
                     <div class="restaurant-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
                             <div>
                                 <span class="rank-badge">#{item.rank}</span>
-                                <h3 style="margin: 0.25rem 0; font-size: 1.2rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
-                                <p style="margin: 0; color: #6b7280; font-size: 0.85rem;">📍 {r.city}</p>
+                                <h3 style="margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
+                                <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">📍 {r.city}</p>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 1rem; font-weight: 700; color: #f97316; margin-bottom: 0.15rem;">{star_rating(r.rating)}</div>
-                                <div style="font-size: 0.8rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
+                                <div style="font-size: 1.2rem; font-weight: 700; color: #f97316; margin-bottom: 0.25rem;">{star_rating(r.rating)}</div>
+                                <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
                             </div>
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    # Combined Cuisines and Features section
-                    col_cuisine, col_feature = st.columns([1, 1])
+                    # Cuisines section
+                    st.markdown("**🍴 Cuisines**")
+                    cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
+                    for i, cuisine in enumerate(r.cuisines[:3]):
+                        with cuisine_cols[i % 3]:
+                            st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
                     
-                    with col_cuisine:
-                        st.markdown("**🍴 Cuisines**")
-                        cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
-                        for i, cuisine in enumerate(r.cuisines[:3]):
-                            with cuisine_cols[i % 3]:
-                                st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
-                    
-                    with col_feature:
-                        if r.tags:
-                            st.markdown("**🏷️ Features**")
-                            feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
-                            for i, tag in enumerate(r.tags[:3]):
-                                with feature_cols[i % 3]:
-                                    st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
+                    # Features section
+                    if r.tags:
+                        st.markdown("**🏷️ Features**")
+                        feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
+                        for i, tag in enumerate(r.tags[:3]):
+                            with feature_cols[i % 3]:
+                                st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
                     
                     # AI explanation
                     if item.explanation:
@@ -718,37 +715,34 @@ if search_btn or quick != "— choose —":
             # ForkFinder Restaurant Card using Streamlit components
             st.markdown(f"""
             <div class="restaurant-card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
                     <div>
                         <span class="rank-badge">#{item.rank}</span>
-                        <h3 style="margin: 0.25rem 0; font-size: 1.2rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
-                        <p style="margin: 0; color: #6b7280; font-size: 0.85rem;">📍 {r.city}</p>
+                        <h3 style="margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
+                        <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">📍 {r.city}</p>
                     </div>
                     <div style="text-align: right;">
-                        <div style="font-size: 1rem; font-weight: 700; color: #f97316; margin-bottom: 0.15rem;">{star_rating(r.rating)}</div>
-                        <div style="font-size: 0.8rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #f97316; margin-bottom: 0.25rem;">{star_rating(r.rating)}</div>
+                        <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
                     </div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
             
-            # Combined Cuisines and Features section
-            col_cuisine, col_feature = st.columns([1, 1])
+            # Cuisines section
+            st.markdown("**🍴 Cuisines**")
+            cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
+            for i, cuisine in enumerate(r.cuisines[:3]):
+                with cuisine_cols[i % 3]:
+                    st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
             
-            with col_cuisine:
-                st.markdown("**🍴 Cuisines**")
-                cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
-                for i, cuisine in enumerate(r.cuisines[:3]):
-                    with cuisine_cols[i % 3]:
-                        st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
-            
-            with col_feature:
-                if r.tags:
-                    st.markdown("**🏷️ Features**")
-                    feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
-                    for i, tag in enumerate(r.tags[:3]):
-                        with feature_cols[i % 3]:
-                            st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
+            # Features section
+            if r.tags:
+                st.markdown("**🏷️ Features**")
+                feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
+                for i, tag in enumerate(r.tags[:3]):
+                    with feature_cols[i % 3]:
+                        st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
             
             # AI explanation
             if item.explanation:
