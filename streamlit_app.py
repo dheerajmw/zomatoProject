@@ -311,14 +311,10 @@ st.markdown("""
         background-color: #000000 !important;
     }
     
-    /* Force black background for all elements */
-    * {
-        background: #000000 !important;
-        background-color: #000000 !important;
-    }
-    
-    /* Override any other background */
-    [style*="background"] {
+        
+    /* Override any background in dark theme only */
+    [data-theme="dark"] [style*="background"],
+    [data-theme="dark"] [style*="background-color"] {
         background: #000000 !important;
         background-color: #000000 !important;
     }
