@@ -1,78 +1,45 @@
-import React, { useState } from 'react';
-import { UserPreferences, BudgetBand } from '@/types';
+import React, { useState, useEffect } from 'react';
+import { Restaurant, RecommendationResponse } from '@/types';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import RestaurantCard from '@/components/RestaurantCard';
 import RestaurantAPI from '@/lib/api';
 
-const RecommendationsPage: React.FC = () => {
-  const [preferences, setPreferences] = useState<UserPreferences>({
+export default function RecommendationsPage() {
+  const [preferences, setPreferences] = useState({
     location: '',
-    budget: BudgetBand.MEDIUM,
-    cuisines: [],
+    budget: 'medium',
+    cuisines: '',
     minimum_rating: 4.0,
-    optional_tags: []
+    optional_tags: ''
   });
-  
-  const [cuisineInput, setCuisineInput] = useState('');
-  const [tagInput, setTagInput] = useState('');
+  const [recommendations, setRecommendations] = useState<RecommendationResponse | null>(null);
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<any>(null);
   const [error, setError] = useState('');
 
-  const availableCuisines = [
-    'North Indian', 'South Indian', 'Chinese', 'Italian', 'Mexican',
-    'Thai', 'Japanese', 'Continental', 'Biryani', 'Kerala',
-    'Bengali', 'Gujarati', 'Rajasthani', 'Mughlai', 'Fast Food'
-  ];
+  const handleInputChange = (field: string, value: any) => {
+    setPreferences(prev => ({ ...prev, [field]: value }));
+  };
 
-  const availableTags = [
-    'online-order', 'delivery', 'takeaway', 'dine-in',
-    'family-friendly', 'quick-service', 'fine-dining',
-    'vegetarian', 'non-vegetarian', 'vegan', 'gluten-free'
-  ];
-
-  const handleAddCuisine = (cuisine: string) => {
-    if (!preferences.cuisines.includes(cuisine)) {
-      setPreferences({
-        ...preferences,
-        cuisines: [...preferences.cuisines, cuisine]
-      });
+  const getRecommendations = async () => {
+    if (!preferences.location || !preferences.cuisines) {
+      setError('Please fill in location and cuisines');
+      return;
     }
-  };
 
-  const handleRemoveCuisine = (cuisine: string) => {
-    setPreferences({
-      ...preferences,
-      cuisines: preferences.cuisines.filter(c => c !== cuisine)
-    });
-  };
-
-  const handleAddTag = (tag: string) => {
-    if (!preferences.optional_tags.includes(tag)) {
-      setPreferences({
-        ...preferences,
-        optional_tags: [...preferences.optional_tags, tag]
-      });
-    }
-  };
-
-  const handleRemoveTag = (tag: string) => {
-    setPreferences({
-      ...preferences,
-      optional_tags: preferences.optional_tags.filter(t => t !== tag)
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
     setLoading(true);
     setError('');
-
+    
     try {
-      // Get display-ready recommendations
-      const response = await RestaurantAPI.getDisplayResponse(preferences, 50, 5, true);
-      setResults(response);
+      const response = await RestaurantAPI.getRecommendations({
+        location: preferences.location,
+        budget: preferences.budget,
+        cuisines: preferences.cuisines.split(',').map(c => c.trim()),
+        minimum_rating: preferences.minimum_rating,
+        optional_tags: preferences.optional_tags ? preferences.optional_tags.split(',').map(t => t.trim()) : []
+      });
+      
+      setRecommendations(response);
     } catch (err: any) {
       setError(err.message || 'Failed to get recommendations');
     } finally {
@@ -80,281 +47,196 @@ const RecommendationsPage: React.FC = () => {
     }
   };
 
-  const handleQuickSearch = (location: string, budget: BudgetBand, cuisines: string[]) => {
+  const quickSearches = [
+    { name: 'Date Night', location: 'Delhi', budget: 'high', cuisines: 'Italian, Continental', rating: 4.5 },
+    { name: 'Family Dinner', location: 'Bangalore', budget: 'medium', cuisines: 'North Indian, Chinese', rating: 4.0 },
+    { name: 'Quick Lunch', location: 'Mumbai', budget: 'low', cuisines: 'Fast Food, South Indian', rating: 3.5 },
+    { name: 'Business Meeting', location: 'Gurgaon', budget: 'high', cuisines: 'Continental, Japanese', rating: 4.5 }
+  ];
+
+  const applyQuickSearch = (search: typeof quickSearches[0]) => {
     setPreferences({
-      ...preferences,
-      location,
-      budget,
-      cuisines
+      location: search.location,
+      budget: search.budget,
+      cuisines: search.cuisines,
+      minimum_rating: search.rating,
+      optional_tags: ''
     });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-primary-600 text-white py-8">
+      <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white py-12">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-2">Restaurant Recommendations</h1>
-          <p className="text-primary-100">
-            Get personalized restaurant recommendations powered by AI
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">
+            Get Personalized Recommendations
+          </h1>
+          <p className="text-xl text-center text-primary-100 max-w-2xl mx-auto">
+            Tell us your preferences and let our AI find the perfect restaurants for you
           </p>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Preference Form */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-bold mb-6">Your Preferences</h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Location */}
-                <Input
-                  label="Location"
-                  placeholder="Enter city or area (e.g., Bangalore, Bellandur)"
-                  value={preferences.location}
-                  onChange={(e) => setPreferences({...preferences, location: e.target.value})}
-                  required
-                />
-
-                {/* Budget */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Budget Range
-                  </label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {Object.values(BudgetBand).map((budget) => (
-                      <button
-                        key={budget}
-                        type="button"
-                        onClick={() => setPreferences({...preferences, budget})}
-                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                          preferences.budget === budget
-                            ? 'bg-primary-600 text-white'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
-                      >
-                        {budget.charAt(0).toUpperCase() + budget.slice(1)}
-                      </button>
-                    ))}
-                  </div>
+        {/* Quick Search Templates */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900">Quick Search Templates</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {quickSearches.map((search, index) => (
+              <button
+                key={index}
+                onClick={() => applyQuickSearch(search)}
+                className="bg-white border border-gray-300 rounded-lg p-4 hover:border-primary-500 hover:shadow-md transition-all text-left"
+              >
+                <div className="font-semibold text-gray-900 mb-1">{search.name}</div>
+                <div className="text-sm text-gray-600">
+                  {search.location} • {search.cuisines} • {search.rating}⭐
                 </div>
+              </button>
+            ))}
+          </div>
+        </div>
 
-                {/* Rating */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Minimum Rating: {preferences.minimum_rating}
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="5"
-                    step="0.5"
-                    value={preferences.minimum_rating}
-                    onChange={(e) => setPreferences({...preferences, minimum_rating: parseFloat(e.target.value)})}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
-                    <span>0</span>
-                    <span>2.5</span>
-                    <span>5</span>
-                  </div>
-                </div>
+        {/* Preference Form */}
+        <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 mb-8">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Your Preferences</h2>
+          
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <Input
+              label="Location"
+              placeholder="Enter city or area..."
+              value={preferences.location}
+              onChange={(e) => handleInputChange('location', e.target.value)}
+            />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Budget Range
+              </label>
+              <select
+                value={preferences.budget}
+                onChange={(e) => handleInputChange('budget', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="low">Low (Under ₹500)</option>
+                <option value="medium">Medium (₹500-₃000)</option>
+                <option value="high">High (Above ₹3000)</option>
+              </select>
+            </div>
+          </div>
 
-                {/* Cuisines */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Cuisines
-                  </label>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {preferences.cuisines.map((cuisine) => (
-                      <span
-                        key={cuisine}
-                        className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm flex items-center gap-1"
-                      >
-                        {cuisine}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveCuisine(cuisine)}
-                          className="text-primary-500 hover:text-primary-700"
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    {availableCuisines.slice(0, 8).map((cuisine) => (
-                      <button
-                        key={cuisine}
-                        type="button"
-                        onClick={() => handleAddCuisine(cuisine)}
-                        disabled={preferences.cuisines.includes(cuisine)}
-                        className="text-xs bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed px-2 py-1 rounded"
-                      >
-                        {cuisine}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Optional Tags */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Optional Tags
-                  </label>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {preferences.optional_tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm flex items-center gap-1"
-                      >
-                        {tag}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveTag(tag)}
-                          className="text-blue-500 hover:text-blue-700"
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    {availableTags.slice(0, 6).map((tag) => (
-                      <button
-                        key={tag}
-                        type="button"
-                        onClick={() => handleAddTag(tag)}
-                        disabled={preferences.optional_tags.includes(tag)}
-                        className="text-xs bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed px-2 py-1 rounded"
-                      >
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  loading={loading}
-                  disabled={!preferences.location || preferences.cuisines.length === 0}
-                  className="w-full"
-                >
-                  {loading ? 'Getting Recommendations...' : 'Get Recommendations'}
-                </Button>
-              </form>
-
-              {/* Quick Search Templates */}
-              <div className="mt-6 pt-6 border-t">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Quick Search</h3>
-                <div className="space-y-2">
-                  <button
-                    onClick={() => handleQuickSearch('Bellandur', BudgetBand.LOW, ['North Indian', 'Chinese'])}
-                    className="w-full text-left text-xs bg-gray-50 hover:bg-gray-100 px-3 py-2 rounded"
-                  >
-                    🍽️ Bellandur • Low Budget • North Indian, Chinese
-                  </button>
-                  <button
-                    onClick={() => handleQuickSearch('Bangalore', BudgetBand.MEDIUM, ['Italian', 'Continental'])}
-                    className="w-full text-left text-xs bg-gray-50 hover:bg-gray-100 px-3 py-2 rounded"
-                  >
-                    🍝 Bangalore • Medium Budget • Italian, Continental
-                  </button>
-                  <button
-                    onClick={() => handleQuickSearch('Delhi', BudgetBand.HIGH, ['Fine Dining', 'Mughlai'])}
-                    className="w-full text-left text-xs bg-gray-50 hover:bg-gray-100 px-3 py-2 rounded"
-                  >
-                    🍴 Delhi • High Budget • Fine Dining, Mughlai
-                  </button>
-                </div>
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <Input
+              label="Cuisines"
+              placeholder="e.g., North Indian, Chinese, Italian"
+              value={preferences.cuisines}
+              onChange={(e) => handleInputChange('cuisines', e.target.value)}
+              helperText="Separate multiple cuisines with commas"
+            />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Minimum Rating: {preferences.minimum_rating}⭐
+              </label>
+              <input
+                type="range"
+                min="1"
+                max="5"
+                step="0.5"
+                value={preferences.minimum_rating}
+                onChange={(e) => handleInputChange('minimum_rating', parseFloat(e.target.value))}
+                className="w-full"
+              />
+              <div className="flex justify-between text-xs text-gray-500 mt-1">
+                <span>1⭐</span>
+                <span>5⭐</span>
               </div>
             </div>
           </div>
 
-          {/* Results */}
-          <div className="lg:col-span-2">
-            {loading && (
-              <div className="bg-white rounded-lg shadow-md p-8 text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-                <p className="text-gray-600">Finding perfect restaurants for you...</p>
+          <div className="mb-6">
+            <Input
+              label="Optional Tags"
+              placeholder="e.g., outdoor seating, family-friendly, romantic"
+              value={preferences.optional_tags}
+              onChange={(e) => handleInputChange('optional_tags', e.target.value)}
+              helperText="Separate multiple tags with commas"
+            />
+          </div>
+
+          <Button 
+            onClick={getRecommendations}
+            loading={loading}
+            className="w-full md:w-auto bg-primary-600 text-white hover:bg-primary-700 px-8 py-3 text-lg"
+          >
+            {loading ? 'Getting Recommendations...' : 'Get Recommendations'}
+          </Button>
+        </div>
+
+        {/* Error */}
+        {error && (
+          <div className="bg-error-50 border border-error-200 rounded-lg p-4 mb-6">
+            <h3 className="text-error-800 font-medium mb-2">Error</h3>
+            <p className="text-error-600">{error}</p>
+          </div>
+        )}
+
+        {/* Results */}
+        {recommendations && (
+          <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">
+                Recommended Restaurants ({recommendations.recommendations.length})
+              </h2>
+              <div className="text-sm text-gray-600">
+                Powered by AI • Generated in {recommendations.processing_time_ms || 'N/A'}ms
               </div>
-            )}
+            </div>
 
-            {error && (
-              <div className="bg-error-50 border border-error-200 rounded-lg p-4 mb-6">
-                <h3 className="text-error-800 font-medium mb-2">Error</h3>
-                <p className="text-error-600">{error}</p>
-              </div>
-            )}
-
-            {results && !loading && (
-              <div>
-                {results.display?.status === 'success' && (
-                  <div>
-                    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-                      <h2 className="text-2xl font-bold mb-2">
-                        {results.display.title}
-                      </h2>
-                      <div className="flex items-center gap-4 text-sm text-gray-600">
-                        <span>📊 {results.display.metadata.total_results} results</span>
-                        <span>🤖 {results.display.metadata.llm_status}</span>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6">
-                      {results.display.restaurants.map((restaurant: any) => (
-                        <RestaurantCard
-                          key={restaurant.rank}
-                          restaurant={restaurant}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {results.display?.status === 'empty' && (
-                  <div className="bg-white rounded-lg shadow-md p-8 text-center">
-                    <div className="text-6xl mb-4">🔍</div>
-                    <h3 className="text-xl font-bold mb-2">No restaurants found</h3>
-                    <p className="text-gray-600 mb-4">{results.display.message}</p>
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                      <h4 className="font-medium mb-2">Suggestions:</h4>
-                      <ul className="text-left text-sm text-gray-600 space-y-1">
-                        {results.display.suggestions?.map((suggestion: string, index: number) => (
-                          <li key={index}>• {suggestion}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-
-                {results.display?.status === 'error' && (
-                  <div className="bg-error-50 border border-error-200 rounded-lg p-8 text-center">
-                    <div className="text-6xl mb-4">⚠️</div>
-                    <h3 className="text-xl font-bold mb-2">Something went wrong</h3>
-                    <p className="text-gray-600">{results.display.message}</p>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {!results && !loading && (
-              <div className="bg-white rounded-lg shadow-md p-8 text-center">
-                <div className="text-6xl mb-4">🍽️</div>
-                <h3 className="text-xl font-bold mb-2">Ready to find restaurants?</h3>
+            {recommendations.recommendations.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">No restaurants found</h3>
                 <p className="text-gray-600 mb-4">
-                  Set your preferences and click "Get Recommendations" to see personalized suggestions
+                  Try adjusting your preferences or search criteria
                 </p>
+                <Button 
+                  onClick={() => setRecommendations(null)}
+                  variant="outline"
+                >
+                  Clear Results
+                </Button>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {recommendations.recommendations.map((restaurant, index) => (
+                  <div key={restaurant.id || index} className="fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <RestaurantCard restaurant={restaurant} />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {recommendations.recommendations.length > 0 && (
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="flex justify-between items-center">
+                  <div className="text-sm text-gray-600">
+                    Found {recommendations.total_candidates || 'N/A'} total candidates, 
+                    showing top {recommendations.recommendations.length} recommendations
+                  </div>
+                  <Button 
+                    onClick={() => setRecommendations(null)}
+                    variant="outline"
+                  >
+                    Search Again
+                  </Button>
+                </div>
               </div>
             )}
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
-};
-
-export default RecommendationsPage;
+}

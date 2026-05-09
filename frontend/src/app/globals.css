@@ -2,17 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base styles */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   
   body {
-    @apply bg-gray-50 text-gray-900;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
   }
 }
 
+/* ForkFinder Custom Components */
 @layer components {
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .forkfinder-gradient {
+    background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+  }
+  
+  .forkfinder-gradient-hover {
+    background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+  }
+  
+  .forkfinder-card {
+    @apply bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-all duration-200;
+  }
+  
+  .forkfinder-button-primary {
+    @apply bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:from-primary-600 hover:to-secondary-600 transition-all duration-200;
+  }
+  
+  .forkfinder-input {
+    @apply border-gray-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg;
+  }
+  
   .btn {
     @apply inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
   }
