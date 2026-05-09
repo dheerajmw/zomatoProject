@@ -634,14 +634,26 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
                     st.markdown(f"""
                     <div class="restaurant-card">
                         <div class="restaurant-header">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <span class="rank-badge">#{item.rank}</span>
-                                    <h3 style="margin: 0.25rem 0; font-size: 1.3rem; font-weight: 700; color: white;">{r.name}</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div style="flex: 1;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                        <span class="rank-badge">#{item.rank}</span>
+                                        <div style="width: 3px; height: 24px; background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.6) 100%); border-radius: 2px;"></div>
+                                        <span style="background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; color: rgba(255,255,255,0.9); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            TOP PICK
+                                        </span>
+                                    </div>
+                                    <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: white; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">{r.name}</h3>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                                        <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px rgba(16,185,129,0.5);"></div>
+                                        <span style="color: rgba(255,255,255,0.8); font-size: 0.8rem; font-weight: 500;">VERIFIED RESTAURANT</span>
+                                    </div>
                                 </div>
-                                <div style="text-align: right;">
-                                    <div style="font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 0.15rem;">{star_rating(r.rating)}</div>
-                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 500;">{budget_display(r.cost_band)}</div>
+                                <div style="text-align: right; margin-left: 1rem;">
+                                    <div style="font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 0.15rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">{star_rating(r.rating)}</div>
+                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 600; background: rgba(255,255,255,0.1); padding: 0.25rem 0.5rem; border-radius: 12px; display: inline-block;">
+                                        {budget_display(r.cost_band)}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -740,14 +752,26 @@ if search_btn or quick != "— choose —":
             st.markdown(f"""
             <div class="restaurant-card">
                 <div class="restaurant-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <span class="rank-badge">#{item.rank}</span>
-                            <h3 style="margin: 0.25rem 0; font-size: 1.3rem; font-weight: 700; color: white;">{r.name}</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                                <span class="rank-badge">#{item.rank}</span>
+                                <div style="width: 3px; height: 24px; background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.6) 100%); border-radius: 2px;"></div>
+                                <span style="background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; color: rgba(255,255,255,0.9); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                    TOP PICK
+                                </span>
+                            </div>
+                            <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: white; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">{r.name}</h3>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                                <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px rgba(16,185,129,0.5);"></div>
+                                <span style="color: rgba(255,255,255,0.8); font-size: 0.8rem; font-weight: 500;">VERIFIED RESTAURANT</span>
+                            </div>
                         </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 0.15rem;">{star_rating(r.rating)}</div>
-                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 500;">{budget_display(r.cost_band)}</div>
+                        <div style="text-align: right; margin-left: 1rem;">
+                            <div style="font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 0.15rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">{star_rating(r.rating)}</div>
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 600; background: rgba(255,255,255,0.1); padding: 0.25rem 0.5rem; border-radius: 12px; display: inline-block;">
+                                {budget_display(r.cost_band)}
+                            </div>
                         </div>
                     </div>
                 </div>
