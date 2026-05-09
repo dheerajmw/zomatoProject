@@ -64,16 +64,36 @@ st.markdown("""
     .restaurant-card {
         background: white;
         border: 1px solid #e5e7eb;
-        border-radius: 16px;
-        padding: 1.5rem;
+        border-radius: 12px;
         margin-bottom: 1.5rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         transition: all 0.3s ease;
+        overflow: hidden;
     }
     
     .restaurant-card:hover {
-        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
-        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.12);
+        transform: translateY(-1px);
+    }
+    
+    .restaurant-header {
+        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        padding: 1rem 1.5rem;
+        position: relative;
+    }
+    
+    .restaurant-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #f97316 0%, #ef4444 50%, #f97316 100%);
+    }
+    
+    .restaurant-content {
+        padding: 1.5rem;
     }
     
     .cuisine-tag {
@@ -613,34 +633,56 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
                     # ForkFinder Restaurant Card using Streamlit components
                     st.markdown(f"""
                     <div class="restaurant-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <div>
-                                <span class="rank-badge">#{item.rank}</span>
-                                <h3 style="margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
-                                <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">📍 {r.city}</p>
+                        <div class="restaurant-header">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <span class="rank-badge">#{item.rank}</span>
+                                    <h3 style="margin: 0.25rem 0; font-size: 1.3rem; font-weight: 700; color: white;">{r.name}</h3>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 0.15rem;">{star_rating(r.rating)}</div>
+                                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 500;">{budget_display(r.cost_band)}</div>
+                                </div>
                             </div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 1.2rem; font-weight: 700; color: #f97316; margin-bottom: 0.25rem;">{star_rating(r.rating)}</div>
-                                <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
-                            </div>
+                        </div>
+                        <div class="restaurant-content">
+                            <p style="margin: 0 0 1rem 0; color: #6b7280; font-size: 0.9rem; font-weight: 500;">📍 {r.city}</p>
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    # Cuisines section
-                    st.markdown("**🍴 Cuisines**")
+                    # Cuisines section inside card
+                    st.markdown(f"""
+                    <div class="restaurant-content" style="padding-top: 0;">
+                        <div style="margin-bottom: 1rem;">
+                            <strong style="color: #374151; font-size: 0.9rem;">🍴 Cuisines</strong>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                    """)
+                    
                     cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
                     for i, cuisine in enumerate(r.cuisines[:3]):
                         with cuisine_cols[i % 3]:
                             st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
                     
-                    # Features section
+                    st.markdown("</div></div>")
+                    
+                    # Features section inside card
                     if r.tags:
-                        st.markdown("**🏷️ Features**")
+                        st.markdown(f"""
+                        <div class="restaurant-content" style="padding-top: 0;">
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: #374151; font-size: 0.9rem;">🏷️ Features</strong>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                        """)
+                        
                         feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
                         for i, tag in enumerate(r.tags[:3]):
                             with feature_cols[i % 3]:
                                 st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
+                        
+                        st.markdown("</div></div>")
                     
                     # AI explanation
                     if item.explanation:
@@ -715,34 +757,56 @@ if search_btn or quick != "— choose —":
             # ForkFinder Restaurant Card using Streamlit components
             st.markdown(f"""
             <div class="restaurant-card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                    <div>
-                        <span class="rank-badge">#{item.rank}</span>
-                        <h3 style="margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
-                        <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">📍 {r.city}</p>
+                <div class="restaurant-header">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span class="rank-badge">#{item.rank}</span>
+                            <h3 style="margin: 0.25rem 0; font-size: 1.3rem; font-weight: 700; color: white;">{r.name}</h3>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 0.15rem;">{star_rating(r.rating)}</div>
+                            <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 500;">{budget_display(r.cost_band)}</div>
+                        </div>
                     </div>
-                    <div style="text-align: right;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #f97316; margin-bottom: 0.25rem;">{star_rating(r.rating)}</div>
-                        <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
-                    </div>
+                </div>
+                <div class="restaurant-content">
+                    <p style="margin: 0 0 1rem 0; color: #6b7280; font-size: 0.9rem; font-weight: 500;">📍 {r.city}</p>
                 </div>
             </div>
             """, unsafe_allow_html=True)
             
-            # Cuisines section
-            st.markdown("**🍴 Cuisines**")
+            # Cuisines section inside card
+            st.markdown(f"""
+            <div class="restaurant-content" style="padding-top: 0;">
+                <div style="margin-bottom: 1rem;">
+                    <strong style="color: #374151; font-size: 0.9rem;">🍴 Cuisines</strong>
+                </div>
+                <div style="margin-bottom: 1rem;">
+            """)
+            
             cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
             for i, cuisine in enumerate(r.cuisines[:3]):
                 with cuisine_cols[i % 3]:
                     st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
             
-            # Features section
+            st.markdown("</div></div>")
+            
+            # Features section inside card
             if r.tags:
-                st.markdown("**🏷️ Features**")
+                st.markdown(f"""
+                <div class="restaurant-content" style="padding-top: 0;">
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="color: #374151; font-size: 0.9rem;">🏷️ Features</strong>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                """)
+                
                 feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
                 for i, tag in enumerate(r.tags[:3]):
                     with feature_cols[i % 3]:
                         st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
+                
+                st.markdown("</div></div>")
             
             # AI explanation
             if item.explanation:
