@@ -477,27 +477,9 @@ if search_btn or quick != "— choose —":
         r = item.restaurant
 
         with st.container():
-            # ForkFinder Restaurant Card
-            # Build cuisine tags
-            cuisine_html = ""
-            for cuisine in r.cuisines:
-                cuisine_html += f'<span class="cuisine-tag">{cuisine}</span>'
-            
-            # Build feature tags
-            features_html = ""
-            if r.tags:
-                features_html += '<div style="margin-bottom: 1rem;"><div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🏷️ Features</div><div>'
-                for tag in r.tags:
-                    features_html += f'<span class="tag-pill">{tag}</span>'
-                features_html += '</div></div>'
-            
-            # Build AI explanation
-            ai_html = ""
-            if item.explanation:
-                ai_html = f'<div class="ai-explanation">🤖 {item.explanation}</div>'
-            
-            # Complete card HTML
-            card_html = f'''<div class="restaurant-card">
+            # ForkFinder Restaurant Card using Streamlit components
+            st.markdown(f"""
+            <div class="restaurant-card">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
                     <div>
                         <span class="rank-badge">#{item.rank}</span>
@@ -509,20 +491,31 @@ if search_btn or quick != "— choose —":
                         <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
                     </div>
                 </div>
-                
-                <div style="margin-bottom: 1rem;">
-                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🍴 Cuisines</div>
-                    <div>
-                        {cuisine_html}
-                    </div>
-                </div>
-                
-                {features_html}
-                
-                {ai_html}
-            </div>'''
+            </div>
+            """, unsafe_allow_html=True)
             
-            st.markdown(card_html, unsafe_allow_html=True)
+            # Cuisines section
+            st.markdown("**🍴 Cuisines**")
+            cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
+            for i, cuisine in enumerate(r.cuisines[:3]):
+                with cuisine_cols[i % 3]:
+                    st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
+            
+            # Features section
+            if r.tags:
+                st.markdown("**🏷️ Features**")
+                feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
+                for i, tag in enumerate(r.tags[:3]):
+                    with feature_cols[i % 3]:
+                        st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
+            
+            # AI explanation
+            if item.explanation:
+                st.markdown(f"""
+                <div class="ai-explanation">
+                    🤖 {item.explanation}
+                </div>
+                """, unsafe_allow_html=True)
 
             st.divider()
 
