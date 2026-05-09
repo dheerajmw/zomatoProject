@@ -627,20 +627,23 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    # Cuisines section
-                    st.markdown("**🍴 Cuisines**")
-                    cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
-                    for i, cuisine in enumerate(r.cuisines[:3]):
-                        with cuisine_cols[i % 3]:
-                            st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
+                    # Combined Cuisines and Features section
+                    col_cuisine, col_feature = st.columns([1, 1])
                     
-                    # Features section
-                    if r.tags:
-                        st.markdown("**🏷️ Features**")
-                        feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
-                        for i, tag in enumerate(r.tags[:3]):
-                            with feature_cols[i % 3]:
-                                st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
+                    with col_cuisine:
+                        st.markdown("**🍴 Cuisines**")
+                        cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
+                        for i, cuisine in enumerate(r.cuisines[:3]):
+                            with cuisine_cols[i % 3]:
+                                st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
+                    
+                    with col_feature:
+                        if r.tags:
+                            st.markdown("**🏷️ Features**")
+                            feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
+                            for i, tag in enumerate(r.tags[:3]):
+                                with feature_cols[i % 3]:
+                                    st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
                     
                     # AI explanation
                     if item.explanation:
@@ -729,20 +732,23 @@ if search_btn or quick != "— choose —":
             </div>
             """, unsafe_allow_html=True)
             
-            # Cuisines section
-            st.markdown("**🍴 Cuisines**")
-            cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
-            for i, cuisine in enumerate(r.cuisines[:3]):
-                with cuisine_cols[i % 3]:
-                    st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
+            # Combined Cuisines and Features section
+            col_cuisine, col_feature = st.columns([1, 1])
             
-            # Features section
-            if r.tags:
-                st.markdown("**🏷️ Features**")
-                feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
-                for i, tag in enumerate(r.tags[:3]):
-                    with feature_cols[i % 3]:
-                        st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
+            with col_cuisine:
+                st.markdown("**🍴 Cuisines**")
+                cuisine_cols = st.columns(len(r.cuisines) if len(r.cuisines) <= 3 else 3)
+                for i, cuisine in enumerate(r.cuisines[:3]):
+                    with cuisine_cols[i % 3]:
+                        st.markdown(f'<span class="cuisine-tag">{cuisine}</span>', unsafe_allow_html=True)
+            
+            with col_feature:
+                if r.tags:
+                    st.markdown("**🏷️ Features**")
+                    feature_cols = st.columns(len(r.tags) if len(r.tags) <= 3 else 3)
+                    for i, tag in enumerate(r.tags[:3]):
+                        with feature_cols[i % 3]:
+                            st.markdown(f'<span class="tag-pill">{tag}</span>', unsafe_allow_html=True)
             
             # AI explanation
             if item.explanation:
