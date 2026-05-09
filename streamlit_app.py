@@ -440,16 +440,6 @@ with col4:
 
 # ── Preferences Section (moved from sidebar) ───────────────────────────────────
 
-# Compact Preferences Header
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.markdown("""
-    <div style="text-align: center; padding: 0.75rem; background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%); border-radius: 12px; margin-bottom: 0.75rem;">
-        <div style="font-size: 2rem; margin-bottom: 0.25rem;">🍽️</div>
-        <h2 style="color: #f97316; font-size: 1.3rem; font-weight: 800; margin: 0;">ForkFinder Preferences</h2>
-        <p style="color: #6b7280; font-size: 0.85rem; margin: 0.25rem 0;">Customize your restaurant discovery</p>
-    </div>
-    """, unsafe_allow_html=True)
 
 # Quick Search Section
 st.markdown("### ⚡ Quick Search")
