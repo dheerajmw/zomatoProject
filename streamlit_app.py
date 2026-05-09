@@ -478,7 +478,20 @@ if search_btn or quick != "— choose —":
 
         with st.container():
             # ForkFinder Restaurant Card
-            st.markdown(f"""
+            cuisine_tags = "".join(f'<span class="cuisine-tag">{c}</span>' for c in r.cuisines)
+            feature_tags = "".join(f'<span class="tag-pill">{t}</span>' for t in r.tags) if r.tags else ""
+            features_section = f'''
+                <div style="margin-bottom: 1rem;">
+                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🏷️ Features</div>
+                    <div>
+                        {feature_tags}
+                    </div>
+                </div>
+                ''' if r.tags else ""
+            
+            ai_explanation = f'<div class="ai-explanation">🤖 {item.explanation}</div>' if item.explanation else ""
+            
+            card_html = f"""
             <div class="restaurant-card">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
                     <div>
@@ -495,22 +508,16 @@ if search_btn or quick != "— choose —":
                 <div style="margin-bottom: 1rem;">
                     <div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🍴 Cuisines</div>
                     <div>
-                        {"".join(f'<span class="cuisine-tag">{c}</span>' for c in r.cuisines)}
+                        {cuisine_tags}
                     </div>
                 </div>
                 
-                {f'''
-                <div style="margin-bottom: 1rem;">
-                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🏷️ Features</div>
-                    <div>
-                        {"".join(f'<span class="tag-pill">{t}</span>' for t in r.tags)}
-                    </div>
-                </div>
-                ''' if r.tags else ''}
+                {features_section}
                 
-                {f'<div class="ai-explanation">🤖 {item.explanation}</div>' if item.explanation else ''}
+                {ai_explanation}
             </div>
-            """, unsafe_allow_html=True)
+            """
+            st.markdown(card_html, unsafe_allow_html=True)
 
             st.divider()
 
