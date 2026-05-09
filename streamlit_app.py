@@ -64,25 +64,25 @@ st.markdown("""
     .restaurant-card {
         background: white;
         border: 1px solid #e5e7eb;
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         transition: all 0.3s ease;
     }
     
     .restaurant-card:hover {
-        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
-        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.12);
+        transform: translateY(-1px);
     }
     
     .cuisine-tag {
         background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
         color: #9a3412;
         border: 1px solid #fb923c;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
+        padding: 2px 8px;
+        border-radius: 16px;
+        font-size: 11px;
         font-weight: 500;
         margin-right: 6px;
         margin-bottom: 4px;
@@ -91,13 +91,13 @@ st.markdown("""
     
     .ai-explanation {
         background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
-        border-left: 4px solid #f97316;
-        padding: 12px 16px;
-        border-radius: 0 12px 12px 0;
+        border-left: 3px solid #f97316;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin: 8px 0;
         font-style: italic;
-        color: #9a3412;
-        margin-top: 12px;
-        box-shadow: 0 2px 8px rgba(249, 115, 22, 0.1);
+        color: #374151;
+        font-size: 13px;
     }
     
     .stat-box {
@@ -613,15 +613,15 @@ if not search_btn and quick == "— choose —" and 'initial_load' not in st.ses
                     # ForkFinder Restaurant Card using Streamlit components
                     st.markdown(f"""
                     <div class="restaurant-card">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
                             <div>
                                 <span class="rank-badge">#{item.rank}</span>
-                                <h3 style="margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
-                                <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">📍 {r.city}</p>
+                                <h3 style="margin: 0.25rem 0; font-size: 1.2rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
+                                <p style="margin: 0; color: #6b7280; font-size: 0.85rem;">📍 {r.city}</p>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 1.2rem; font-weight: 700; color: #f97316; margin-bottom: 0.25rem;">{star_rating(r.rating)}</div>
-                                <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
+                                <div style="font-size: 1rem; font-weight: 700; color: #f97316; margin-bottom: 0.15rem;">{star_rating(r.rating)}</div>
+                                <div style="font-size: 0.8rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
                             </div>
                         </div>
                     </div>
@@ -715,15 +715,15 @@ if search_btn or quick != "— choose —":
             # ForkFinder Restaurant Card using Streamlit components
             st.markdown(f"""
             <div class="restaurant-card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
                     <div>
                         <span class="rank-badge">#{item.rank}</span>
-                        <h3 style="margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
-                        <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">📍 {r.city}</p>
+                        <h3 style="margin: 0.25rem 0; font-size: 1.2rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
+                        <p style="margin: 0; color: #6b7280; font-size: 0.85rem;">📍 {r.city}</p>
                     </div>
                     <div style="text-align: right;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #f97316; margin-bottom: 0.25rem;">{star_rating(r.rating)}</div>
-                        <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
+                        <div style="font-size: 1rem; font-weight: 700; color: #f97316; margin-bottom: 0.15rem;">{star_rating(r.rating)}</div>
+                        <div style="font-size: 0.8rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
                     </div>
                 </div>
             </div>
