@@ -424,21 +424,6 @@ st.markdown("""
     [data-theme="dark"] .element-container,
     [data-theme="dark"] .block-container,
     [data-theme="dark"] .stVerticalBlock,
-    [data-theme="dark"] .stHorizontalBlock {
-        background: transparent !important;
-        background-color: transparent !important;
-    }
-    
-    /* Override any light backgrounds */
-    [data-theme="dark"] [style*="background"],
-    [data-theme="dark"] [style*="background-color"] {
-        background: #000000 !important;
-        background-color: #000000 !important;
-    }
-    
-    /* Alternative dark theme detection */
-    .stApp.darkTheme,
-    .stApp.darkTheme body,
     .stApp.darkTheme [data-testid="stAppViewContainer"],
     .stApp.darkTheme [data-testid="stAppViewContainer"] > div,
     .stApp.darkTheme [data-testid="stAppViewContainer"] > div > div {
