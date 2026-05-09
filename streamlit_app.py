@@ -710,7 +710,7 @@ st.markdown("""
     <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
         <div style="font-size: 3rem; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 8px rgba(234, 88, 12, 0.5)); animation: pulse 2s ease-in-out infinite;">🍽️</div>
     </div>
-    <h1 style="color: #ea580c; font-size: 2.5rem; font-weight: 900; margin: 0; text-shadow: 0 2px 4px rgba(234, 88, 12, 0.3);">
+    <h1 style="color: #ea580c; font-size: 2.5rem; font-weight: 900; margin: 0;">
         ForkFinder
     </h1>
     <p style="color: #e5e5e5; font-size: 1rem; margin: 0.5rem 0; font-weight: 500; letter-spacing: 0.5px;">
