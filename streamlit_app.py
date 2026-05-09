@@ -730,27 +730,44 @@ st.markdown("""
 # JavaScript to force light theme white background
 st.markdown("""
 <script>
-// Force white background in light theme
+// Comprehensive light theme background enforcement
 function forceLightThemeBackground() {
     const isLightTheme = !document.body.getAttribute('data-theme') || 
                          document.body.getAttribute('data-theme') !== 'dark';
     
     if (isLightTheme) {
-        // Force white background on all elements
+        // Force white background with maximum specificity
+        const style = document.createElement('style');
+        style.textContent = `
+            body, html, .stApp {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+            }
+            
+            body:not([data-theme="dark"]):not(.stApp),
+            html:not([data-theme="dark"]):not(.stApp),
+            .stApp:not([data-theme="dark"]) {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+            }
+            
+            body:not([data-theme="dark"]):not(.stApp) *,
+            html:not([data-theme="dark"]):not(.stApp) *,
+            .stApp:not([data-theme="dark"]) * {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Direct DOM manipulation
         document.body.style.background = '#ffffff';
         document.body.style.backgroundColor = '#ffffff';
         document.documentElement.style.background = '#ffffff';
         document.documentElement.style.backgroundColor = '#ffffff';
         
-        // Apply to all major containers
-        const containers = document.querySelectorAll('.stApp, [data-testid="stAppViewContainer"], .element-container, .block-container');
-        containers.forEach(el => {
-            el.style.background = '#ffffff';
-            el.style.backgroundColor = '#ffffff';
-        });
-        
-        // Apply to all divs and sections
-        const allElements = document.querySelectorAll('div, section, main');
+        // Apply to all elements
+        const allElements = document.querySelectorAll('*');
         allElements.forEach(el => {
             if (!el.closest('[data-theme="dark"]')) {
                 el.style.background = '#ffffff';
@@ -762,7 +779,7 @@ function forceLightThemeBackground() {
 
 // Run immediately and continuously check
 forceLightThemeBackground();
-setInterval(forceLightThemeBackground, 1000);
+setInterval(forceLightThemeBackground, 500);
 
 // Also check for theme changes
 const observer = new MutationObserver(forceLightThemeBackground);
