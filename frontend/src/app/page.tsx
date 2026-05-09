@@ -6,56 +6,50 @@ import DarkModeToggle from '@/components/DarkModeToggle';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-secondary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-accent-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-      </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Navigation */}
+      <nav className="bg-white dark:bg-gray-800 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <span className="text-2xl font-bold text-orange-600">🍽️ ForkFinder</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link href="/catalog" className="text-gray-700 dark:text-gray-300 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium">
+                Browse
+              </Link>
+              <Link href="/recommendations" className="text-gray-700 dark:text-gray-300 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium">
+                Recommendations
+              </Link>
+              <DarkModeToggle />
+            </div>
+          </div>
+        </div>
+      </nav>
 
-      {/* Dark Mode Toggle */}
-      <div className="fixed top-4 right-4 z-50">
-        <DarkModeToggle />
-      </div>
-
-      {/* Hero Section with Advanced Effects */}
-      <div className="relative">
-        <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-black opacity-20"></div>
-          <div className="container mx-auto px-4 py-20 relative">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="float-animation mb-8">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-6">
-                  <span className="text-4xl">🍽️</span>
-                </div>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in">
-                <span className="gradient-text">Find Your Perfect</span>
-                <br />
-                <span className="text-primary-200">Dining Experience</span>
-              </h1>
-              <p className="text-xl md:text-2xl mb-12 text-primary-100 max-w-2xl mx-auto slide-up">
-                AI-powered restaurant recommendations tailored to your taste, budget, and location
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/recommendations">
-                  <Button size="lg" className="magnetic-button glow-effect bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-                    <span className="flex items-center">
-                      <span className="mr-2">🚀</span>
-                      Get Recommendations
-                    </span>
-                  </Button>
-                </Link>
-                <Link href="/catalog">
-                  <Button size="lg" variant="outline" className="magnetic-button border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 text-lg font-semibold">
-                    <span className="flex items-center">
-                      <span className="mr-2">🔍</span>
-                      Explore Restaurants
-                    </span>
-                  </Button>
-                </Link>
-              </div>
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-r from-orange-500 to-amber-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Find Your Perfect
+              <br />
+              <span className="text-orange-100">Dining Experience</span>
+            </h1>
+            <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+              AI-powered restaurant recommendations tailored to your taste, budget, and location
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/recommendations">
+                <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
+                  Get Recommendations
+                </Button>
+              </Link>
+              <Link href="/catalog">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 text-lg font-semibold">
+                  Explore Restaurants
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
