@@ -90,24 +90,13 @@ st.markdown("""
         overflow: hidden;
     }
     
-    /* Enhanced Restaurant Cards - Theme Support */
-    .restaurant-card {
-        background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        transition: all 0.3s ease;
-        overflow: hidden;
-    }
-    
     /* Light theme specific restaurant card styling */
     [data-theme="light"] .restaurant-card {
-        background: linear-gradient(135deg, #fed7aa 0%, #fbbf24 50%, #fb923c 100%);
-        border: 1px solid #f59e0b;
+        background: linear-gradient(135deg, #fed7aa 0%, #fbbf24 50%, #fb923c 100%) !important;
+        border: 1px solid #f59e0b !important;
         border-radius: 12px;
         margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(251, 146, 60, 0.2), 0 1px 2px rgba(251, 146, 60, 0.3);
+        box-shadow: 0 2px 8px rgba(251, 146, 60, 0.2), 0 1px 2px rgba(251, 146, 60, 0.3) !important;
         transition: all 0.3s ease;
         overflow: hidden;
         position: relative;
