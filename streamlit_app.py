@@ -9,37 +9,33 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-# ── Step 1: inject Streamlit secrets into os.environ FIRST ───────────────────
-# Must happen before ANY app.* import so pydantic-settings picks them up.
-# Import streamlit here only for secrets — page config comes later.
+# ── Step 1: inject Streamlit secrets into os.environ ─────────────────────────
+# Must happen before ANY app.* import so pydantic-settings reads correct values.
 import streamlit as st
 
-def _inject_secrets() -> None:
-    """Force-copy Streamlit secrets into os.environ."""
-    try:
-        for key, value in st.secrets.items():
-            if isinstance(value, str) and value.strip():
-                os.environ[key] = value  # force-set, not setdefault
-    except Exception:
-        pass  # running locally — env vars already set via .env
+try:
+    for _k, _v in st.secrets.items():
+        if isinstance(_v, str) and _v.strip():
+            os.environ[_k] = _v
+except Exception:
+    pass  # local run — values already in .env / os.environ
 
-_inject_secrets()
-
-# ── Step 2: set CSV path before any app import ───────────────────────────────
+# ── Step 2: set CSV path ──────────────────────────────────────────────────────
 _SAMPLE_CSV = str(Path(__file__).parent / "tests" / "fixtures" / "zomato_full_sample.csv")
 if not os.environ.get("ZOMATO_CSV_PATH"):
     os.environ["ZOMATO_CSV_PATH"] = _SAMPLE_CSV
 
-# ── Step 3: bust settings cache so all app modules see fresh env vars ─────────
-from app.config import get_settings, Settings
-get_settings.cache_clear()
-# Also patch the module-level `settings` singleton that phase modules imported
-import app.config as _app_config
-_app_config.settings = Settings()
+# ── Step 3: NOW import app modules (env is fully set) ────────────────────────
+# No patching needed — pydantic-settings reads os.environ at first instantiation.
+from app.schemas import UserPreferences, BudgetBand
+from app.phase1 import catalog_summary
+from app.phase1.catalog import load_catalog, clear_catalog_cache
+from app.phase2 import PreferencesValidationError
+from app.phase4 import recommend
 
 # ── Page config (must be first Streamlit call) ────────────────────────────────
 st.set_page_config(
-    page_title="🍽️ Restaurant Recommendations",
+    page_title="🍽️ ForkFinder - AI Restaurant Recommendations",
     page_icon="🍽️",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -48,72 +44,201 @@ st.set_page_config(
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
+    /* ForkFinder Theme - Orange/Red Gradient */
+    .forkfinder-gradient {
+        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+    }
+    
     .rank-badge {
-        background: #E23744;
+        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
         color: white;
-        padding: 4px 12px;
-        border-radius: 20px;
+        padding: 6px 16px;
+        border-radius: 25px;
         font-weight: bold;
         font-size: 14px;
         display: inline-block;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
     }
+    
     .restaurant-card {
         background: white;
-        border: 1px solid #e0e0e0;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+    }
+    
+    .restaurant-card:hover {
+        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
+        transform: translateY(-2px);
+    }
+    
+    .cuisine-tag {
+        background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+        color: #9a3412;
+        border: 1px solid #fb923c;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        margin-right: 6px;
+        margin-bottom: 4px;
+        display: inline-block;
+    }
+    
+    .ai-explanation {
+        background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+        border-left: 4px solid #f97316;
+        padding: 12px 16px;
+        border-radius: 0 12px 12px 0;
+        font-style: italic;
+        color: #9a3412;
+        margin-top: 12px;
+        box-shadow: 0 2px 8px rgba(249, 115, 22, 0.1);
+    }
+    
+    .stat-box {
+        background: white;
         border-radius: 12px;
         padding: 20px;
-        margin-bottom: 16px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        border: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+    }
+    
+    .stat-box:hover {
+        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
+        transform: translateY(-2px);
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 4px;
+    }
+    
+    .tag-pill {
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        color: #dc2626;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 500;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        display: inline-block;
+        border: 1px solid #f87171;
+    }
+    
+    /* Header styling */
+    .main-header {
+        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        color: white;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
+    }
+    
+    .main-header h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+    }
+    
+    .main-header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+    
+    /* Sidebar enhancements */
+    .sidebar-content {
+        background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%);
+        padding: 1rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+    
+    /* Input styling */
+    .stTextInput > div > div > input,
+    .stSelectbox > div > div > select {
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .stTextInput > div > div > input:focus,
+    .stSelectbox > div > div > select:focus {
+        border-color: #f97316;
+        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+    }
+    
+    /* Slider styling */
+    .stSlider > div > div > div {
+        background: linear-gradient(90deg, #f97316 0%, #ef4444 100%);
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1rem;
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-    .cuisine-tag {
-        background: #f8f9fa;
-        border: 1px solid #dee2e6;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 13px;
-        margin-right: 6px;
-        display: inline-block;
+    
+    /* Success/Error styling */
+    .stSuccess {
+        background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
+        border-left: 4px solid #22c55e;
+        color: #14532d;
     }
-    .ai-explanation {
-        background: #f0f7ff;
-        border-left: 4px solid #E23744;
-        padding: 10px 14px;
-        border-radius: 0 8px 8px 0;
-        font-style: italic;
-        color: #444;
-        margin-top: 10px;
+    
+    .stError {
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        border-left: 4px solid #ef4444;
+        color: #7f1d1d;
     }
-    .stat-box {
-        background: #fff;
-        border-radius: 10px;
-        padding: 16px;
-        text-align: center;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    
+    .stWarning {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border-left: 4px solid #f59e0b;
+        color: #78350f;
     }
-    .stat-number {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #E23744;
-    }
-    .tag-pill {
-        background: #e3f2fd;
-        color: #1565c0;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 12px;
-        margin-right: 4px;
-        display: inline-block;
+    
+    .stInfo {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        border-left: 4px solid #3b82f6;
+        color: #1e40af;
     }
 </style>
 """, unsafe_allow_html=True)
-
-
-# ── Imports (after page config) ───────────────────────────────────────────────
-from app.schemas import UserPreferences, BudgetBand
-from app.phase2 import PreferencesValidationError
-from app.phase4 import recommend
-from app.phase1 import catalog_summary
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -175,7 +300,6 @@ def get_catalog():
         st.session_state[cache_key] = load_catalog()
     return st.session_state[cache_key]
 
-
 def star_rating(rating: float) -> str:
     full = int(rating)
     return "⭐" * full + f"  **{rating}**"
@@ -192,9 +316,14 @@ def budget_display(band: BudgetBand) -> str:
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 
 with st.sidebar:
-    st.image("https://img.icons8.com/color/96/restaurant.png", width=64)
-    st.title("🍽️ Restaurant Finder")
-    st.caption("AI-powered recommendations using Groq LLM")
+    # ForkFinder Logo and Title
+    st.markdown("""
+    <div style="text-align: center; padding: 1rem;">
+        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🍽️</div>
+        <h1 style="color: #f97316; font-size: 1.8rem; font-weight: 800; margin: 0;">ForkFinder</h1>
+        <p style="color: #6b7280; font-size: 0.9rem; margin: 0.5rem 0;">AI-Powered Restaurant Discovery</p>
+    </div>
+    """, unsafe_allow_html=True)
     st.divider()
 
     # Quick search
@@ -258,9 +387,14 @@ if quick != "— choose —":
 
 # ── Main area ─────────────────────────────────────────────────────────────────
 
-st.markdown("## 🍽️ AI-Powered Restaurant Recommendations")
-st.caption("Powered by Groq · llama-3.3-70b-versatile · Zomato dataset")
-st.divider()
+# ForkFinder Header
+st.markdown("""
+<div class="main-header">
+    <h1>🍽️ ForkFinder</h1>
+    <p>Find Your Perfect Dining Experience with AI-Powered Recommendations</p>
+    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">Powered by Groq · llama-3.3-70b-versatile · Zomato dataset</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Stats row — load catalog once, show spinner on first load
 with st.spinner("Loading restaurant catalog…"):
@@ -343,40 +477,40 @@ if search_btn or quick != "— choose —":
         r = item.restaurant
 
         with st.container():
-            st.markdown(
-                f'<span class="rank-badge">#{item.rank}</span>',
-                unsafe_allow_html=True,
-            )
-
-            col_left, col_right = st.columns([3, 1])
-
-            with col_left:
-                st.markdown(f"#### {r.name}")
-                st.caption(f"📍 {r.city}")
-
-                # Cuisine tags
-                tags_html = "".join(
-                    f'<span class="cuisine-tag">{c}</span>' for c in r.cuisines
-                )
-                st.markdown(tags_html, unsafe_allow_html=True)
-
-                # Optional tags
-                if r.tags:
-                    pills_html = "".join(
-                        f'<span class="tag-pill">{t}</span>' for t in r.tags
-                    )
-                    st.markdown(pills_html, unsafe_allow_html=True)
-
-            with col_right:
-                st.markdown(f"**Rating:** {star_rating(r.rating)}")
-                st.markdown(f"**Budget:** {budget_display(r.cost_band)}")
-
-            # AI explanation
-            if item.explanation:
-                st.markdown(
-                    f'<div class="ai-explanation">🤖 {item.explanation}</div>',
-                    unsafe_allow_html=True,
-                )
+            # ForkFinder Restaurant Card
+            st.markdown(f"""
+            <div class="restaurant-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                    <div>
+                        <span class="rank-badge">#{item.rank}</span>
+                        <h3 style="margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1f2937;">{r.name}</h3>
+                        <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">📍 {r.city}</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #f97316; margin-bottom: 0.25rem;">{star_rating(r.rating)}</div>
+                        <div style="font-size: 0.9rem; color: #6b7280; font-weight: 500;">{budget_display(r.cost_band)}</div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🍴 Cuisines</div>
+                    <div>
+                        {"".join(f'<span class="cuisine-tag">{c}</span>' for c in r.cuisines)}
+                    </div>
+                </div>
+                
+                {f'''
+                <div style="margin-bottom: 1rem;">
+                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🏷️ Features</div>
+                    <div>
+                        {"".join(f'<span class="tag-pill">{t}</span>' for t in r.tags)}
+                    </div>
+                </div>
+                ''' if r.tags else ''}
+                
+                {f'<div class="ai-explanation">🤖 {item.explanation}</div>' if item.explanation else ''}
+            </div>
+            """, unsafe_allow_html=True)
 
             st.divider()
 
