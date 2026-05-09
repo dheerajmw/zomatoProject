@@ -6,89 +6,116 @@ import DarkModeToggle from '@/components/DarkModeToggle';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-secondary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-accent-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      </div>
+
       {/* Dark Mode Toggle */}
       <div className="fixed top-4 right-4 z-50">
         <DarkModeToggle />
       </div>
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white">
-        <div className="container mx-auto px-4 py-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Find Your Perfect
-              <br />
-              <span className="text-primary-200">Dining Experience</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-12 text-primary-100 max-w-2xl mx-auto">
-              AI-powered restaurant recommendations tailored to your taste, budget, and location
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/recommendations">
-                <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg">
-                  Get Recommendations
-                </Button>
-              </Link>
-              <Link href="/catalog">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 text-lg">
-                  Explore Restaurants
-                </Button>
-              </Link>
+
+      {/* Hero Section with Advanced Effects */}
+      <div className="relative">
+        <div className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-black opacity-20"></div>
+          <div className="container mx-auto px-4 py-20 relative">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="float-animation mb-8">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-6">
+                  <span className="text-4xl">🍽️</span>
+                </div>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in">
+                <span className="gradient-text">Find Your Perfect</span>
+                <br />
+                <span className="text-primary-200">Dining Experience</span>
+              </h1>
+              <p className="text-xl md:text-2xl mb-12 text-primary-100 max-w-2xl mx-auto slide-up">
+                AI-powered restaurant recommendations tailored to your taste, budget, and location
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/recommendations">
+                  <Button size="lg" className="magnetic-button glow-effect bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                    <span className="flex items-center">
+                      <span className="mr-2">🚀</span>
+                      Get Recommendations
+                    </span>
+                  </Button>
+                </Link>
+                <Link href="/catalog">
+                  <Button size="lg" variant="outline" className="magnetic-button border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 text-lg font-semibold">
+                    <span className="flex items-center">
+                      <span className="mr-2">🔍</span>
+                      Explore Restaurants
+                    </span>
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Features Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      {/* Features Section with Advanced Effects */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800 relative">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            Why Choose Our Recommendations?
-          </h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+              <span className="gradient-text">Why Choose Our Recommendations?</span>
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Experience the future of restaurant discovery with cutting-edge AI technology
+            </p>
+          </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="glassmorphism hover-lift p-6 rounded-2xl text-center group">
+              <div className="bg-gradient-to-r from-primary-500 to-secondary-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 pulse-animation">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">AI-Powered</h3>
-              <p className="text-gray-600">
-                Advanced machine learning algorithms analyze your preferences to provide perfect restaurant matches
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">AI-Powered</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Get personalized recommendations instantly with our fast and efficient recommendation engine
               </p>
             </div>
-            <div className="text-center">
-              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Personalized</h3>
-              <p className="text-gray-600">
-                Tailored recommendations based on your location, budget, cuisine preferences, and dining history
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="glassmorphism hover-lift p-6 rounded-2xl text-center group">
+              <div className="bg-gradient-to-r from-primary-500 to-secondary-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 pulse-animation">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Instant Results</h3>
-              <p className="text-gray-600">
-                Get personalized recommendations instantly with our fast and efficient recommendation engine
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Instant Results</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Receive immediate restaurant suggestions tailored to your preferences and location
+              </p>
+            </div>
+            <div className="glassmorphism hover-lift p-6 rounded-2xl text-center group">
+              <div className="bg-gradient-to-r from-primary-500 to-secondary-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 pulse-animation">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Personalized</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Our AI learns from your preferences to provide better recommendations over time
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sample Recommendations */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      {/* Sample Recommendations with Advanced Effects */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-orange-50 dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Discover Amazing Restaurants
+            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+              <span className="gradient-text">Discover Amazing Restaurants</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Explore our curated selection of top-rated restaurants in your area
@@ -96,42 +123,48 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            <RestaurantCard
-              restaurant={{
-                id: '1',
-                name: 'The Garden Terrace',
-                city: 'Bangalore',
-                cuisines: ['Continental', 'Italian'],
-                rating: 4.5,
-                cost_band: 'medium',
-                tags: ['romantic', 'outdoor seating'],
-                explanation: 'Perfect for romantic dinners with authentic Italian cuisine and beautiful garden ambiance.'
-              }}
-            />
-            <RestaurantCard
-              restaurant={{
-                id: '2',
-                name: 'Spice Route',
-                city: 'Delhi',
-                cuisines: ['North Indian', 'Mughlai'],
-                rating: 4.8,
-                cost_band: 'high',
-                tags: ['fine dining', 'authentic'],
-                explanation: 'Experience authentic Mughlai flavors in an elegant setting with impeccable service.'
-              }}
-            />
-            <RestaurantCard
-              restaurant={{
-                id: '3',
-                name: 'Coastal Delights',
-                city: 'Mumbai',
-                cuisines: ['Seafood', 'Goan'],
-                rating: 4.3,
-                cost_band: 'medium',
-                tags: ['seafood', 'casual'],
-                explanation: 'Fresh coastal cuisine with a focus on Goan flavors and sustainable seafood.'
-              }}
-            />
+            <div className="hover-lift">
+              <RestaurantCard
+                restaurant={{
+                  id: '1',
+                  name: 'The Garden Terrace',
+                  city: 'Bangalore',
+                  cuisines: ['Continental', 'Italian'],
+                  cost_band: 'medium',
+                  rating: 4.5,
+                  tags: ['romantic', 'outdoor-seating'],
+                  explanation: 'Perfect for romantic dinners with beautiful garden ambiance and exceptional Italian cuisine.'
+                }}
+              />
+            </div>
+            <div className="hover-lift">
+              <RestaurantCard
+                restaurant={{
+                  id: '2',
+                  name: 'Spice Garden',
+                  city: 'Delhi',
+                  cuisines: ['North Indian', 'Mughlai'],
+                  cost_band: 'medium',
+                  rating: 4.3,
+                  tags: ['family-friendly', 'casual-dining'],
+                  explanation: 'Authentic North Indian flavors with a modern twist, great for family gatherings.'
+                }}
+              />
+            </div>
+            <div className="hover-lift">
+              <RestaurantCard
+                restaurant={{
+                  id: '3',
+                  name: 'Sushi Master',
+                  city: 'Mumbai',
+                  cuisines: ['Japanese', 'Sushi'],
+                  cost_band: 'high',
+                  rating: 4.8,
+                  tags: ['fine-dining', 'sushi-bar'],
+                  explanation: 'Premium sushi experience with fresh ingredients and master chefs.'
+                }}
+              />
+            </div>
           </div>
 
           <div className="text-center">

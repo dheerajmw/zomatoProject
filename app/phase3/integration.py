@@ -31,7 +31,8 @@ class CandidateSelection:
 
 def _matches_location(record: RestaurantRecord, location: str) -> bool:
     loc = normalize_location_query(location).lower()
-    return loc in record.city.lower()
+    record_loc = normalize_location_query(record.city).lower()
+    return loc == record_loc
 
 
 def _matches_budget(record: RestaurantRecord, budget: BudgetBand) -> bool:
