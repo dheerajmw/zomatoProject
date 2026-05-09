@@ -149,20 +149,109 @@ st.markdown("""
         animation: shimmer 3s ease-in-out infinite;
     }
     
-    /* Light theme restaurant name color */
-    [data-theme="light"] .restaurant-name {
-        color: #1f2937;
-        font-weight: 700;
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
+    /* Enhanced Restaurant Name Cards - Theme Support */
+    .restaurant-name {
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.025em;
+        transition: all 0.3s ease;
     }
     
-    /* Dark theme restaurant name color */
+    /* Light theme restaurant name styling */
+    [data-theme="light"] .restaurant-name {
+        color: #1f2937;
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.025em;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    [data-theme="light"] .restaurant-name::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #ea580c 0%, #dc2626 100%);
+        transition: width 0.3s ease;
+    }
+    
+    [data-theme="light"] .restaurant-card:hover .restaurant-name::after {
+        width: 100%;
+    }
+    
+    /* Dark theme restaurant name styling */
     [data-theme="dark"] .restaurant-name {
         color: #ffffff;
-        font-weight: 700;
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.025em;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    [data-theme="dark"] .restaurant-name::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #ea580c 0%, #dc2626 100%);
+        transition: width 0.3s ease;
+    }
+    
+    [data-theme="dark"] .restaurant-card:hover .restaurant-name::after {
+        width: 100%;
+    }
+    
+    /* Restaurant name hover effects */
+    .restaurant-card:hover .restaurant-name {
+        transform: translateY(-1px);
+        filter: brightness(1.1);
+    }
+    
+    [data-theme="light"] .restaurant-card:hover .restaurant-name {
+        color: #374151;
+    }
+    
+    [data-theme="dark"] .restaurant-card:hover .restaurant-name {
+        color: #f9fafb;
+    }
+    
+    /* Restaurant name gradient effect for special restaurants */
+    .restaurant-name.featured {
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #ea580c 100%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease infinite;
+    }
+    
+    @keyframes gradient-shift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
     
     /* Light theme restaurant rating color */
