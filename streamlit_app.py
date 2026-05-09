@@ -694,6 +694,52 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# JavaScript to force light theme white background
+st.markdown("""
+<script>
+// Force white background in light theme
+function forceLightThemeBackground() {
+    const isLightTheme = !document.body.getAttribute('data-theme') || 
+                         document.body.getAttribute('data-theme') !== 'dark';
+    
+    if (isLightTheme) {
+        // Force white background on all elements
+        document.body.style.background = '#ffffff';
+        document.body.style.backgroundColor = '#ffffff';
+        document.documentElement.style.background = '#ffffff';
+        document.documentElement.style.backgroundColor = '#ffffff';
+        
+        // Apply to all major containers
+        const containers = document.querySelectorAll('.stApp, [data-testid="stAppViewContainer"], .element-container, .block-container');
+        containers.forEach(el => {
+            el.style.background = '#ffffff';
+            el.style.backgroundColor = '#ffffff';
+        });
+        
+        // Apply to all divs and sections
+        const allElements = document.querySelectorAll('div, section, main');
+        allElements.forEach(el => {
+            if (!el.closest('[data-theme="dark"]')) {
+                el.style.background = '#ffffff';
+                el.style.backgroundColor = '#ffffff';
+            }
+        });
+    }
+}
+
+// Run immediately and continuously check
+forceLightThemeBackground();
+setInterval(forceLightThemeBackground, 1000);
+
+// Also check for theme changes
+const observer = new MutationObserver(forceLightThemeBackground);
+observer.observe(document.body, { 
+    attributes: true, 
+    attributeFilter: ['data-theme'] 
+});
+</script>
+""", unsafe_allow_html=True)
+
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
