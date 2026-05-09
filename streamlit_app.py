@@ -294,6 +294,126 @@ st.markdown("""
         letter-spacing: -0.025em !important;
     }
     
+    /* Dark Theme Support */
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%) !important;
+    }
+    
+    [data-theme="dark"] .stApp {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    }
+    
+    [data-theme="dark"] body {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%) !important;
+    }
+    
+    [data-theme="dark"] .restaurant-card {
+        background: #2a2a2a !important;
+        border: 1px solid #404040 !important;
+        color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] .restaurant-content {
+        color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] .restaurant-header {
+        background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #dc2626 100%) !important;
+    }
+    
+    [data-theme="dark"] .cuisine-tag {
+        background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%) !important;
+        color: white !important;
+        border: 1px solid #c2410c !important;
+    }
+    
+    [data-theme="dark"] .cuisine-tag:hover {
+        background: linear-gradient(135deg, #c2410c 0%, #b91c1c 100%) !important;
+    }
+    
+    [data-theme="dark"] .tag-pill {
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
+        color: white !important;
+        border: 1px solid #c2410c !important;
+    }
+    
+    [data-theme="dark"] .tag-pill:hover {
+        background: linear-gradient(135deg, #c2410c 0%, #b91c1c 100%) !important;
+    }
+    
+    [data-theme="dark"] .ai-explanation {
+        background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+        border-left: 4px solid #ea580c !important;
+        color: #e5e5e5 !important;
+    }
+    
+    [data-theme="dark"] .stat-box {
+        background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #dc2626 100%) !important;
+        color: white !important;
+    }
+    
+    [data-theme="dark"] .main-header {
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
+    }
+    
+    [data-theme="dark"] .stTextInput > div > div > input,
+    [data-theme="dark"] .stSelectbox > div > div > select,
+    [data-theme="dark"] .stSlider > div > div > div {
+        background: #2a2a2a !important;
+        color: #ffffff !important;
+        border: 2px solid #404040 !important;
+    }
+    
+    [data-theme="dark"] .stTextInput > div > div > input:focus,
+    [data-theme="dark"] .stSelectbox > div > div > select:focus,
+    [data-theme="dark"] .stSlider > div > div > div:focus {
+        border-color: #ea580c !important;
+        background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+    }
+    
+    [data-theme="dark"] .stSidebar {
+        background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%) !important;
+        border-right: 1px solid #404040 !important;
+    }
+    
+    [data-theme="dark"] .stSidebar .stMarkdown {
+        color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] .stSidebar h1, 
+    [data-theme="dark"] .stSidebar h2, 
+    [data-theme="dark"] .stSidebar h3 {
+        color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] .stMarkdown {
+        color: #e5e5e5 !important;
+    }
+    
+    [data-theme="dark"] h1, 
+    [data-theme="dark"] h2, 
+    [data-theme="dark"] h3,
+    [data-theme="dark"] h4,
+    [data-theme="dark"] h5,
+    [data-theme="dark"] h6 {
+        color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] p, 
+    [data-theme="dark"] span, 
+    [data-theme="dark"] div {
+        color: #e5e5e5 !important;
+    }
+    
+    [data-theme="dark"] .stButton > button {
+        background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
+        color: white !important;
+    }
+    
+    [data-theme="dark"] .stButton > button:hover {
+        background: linear-gradient(135deg, #c2410c 0%, #b91c1c 100%) !important;
+    }
+    
     .stRadio > div,
     .stCheckbox > div {
         cursor: pointer;
