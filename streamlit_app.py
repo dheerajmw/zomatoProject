@@ -478,21 +478,26 @@ if search_btn or quick != "— choose —":
 
         with st.container():
             # ForkFinder Restaurant Card
-            cuisine_tags = "".join(f'<span class="cuisine-tag">{c}</span>' for c in r.cuisines)
-            feature_tags = "".join(f'<span class="tag-pill">{t}</span>' for t in r.tags) if r.tags else ""
-            features_section = f'''
-                <div style="margin-bottom: 1rem;">
-                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🏷️ Features</div>
-                    <div>
-                        {feature_tags}
-                    </div>
-                </div>
-                ''' if r.tags else ""
+            # Build cuisine tags
+            cuisine_html = ""
+            for cuisine in r.cuisines:
+                cuisine_html += f'<span class="cuisine-tag">{cuisine}</span>'
             
-            ai_explanation = f'<div class="ai-explanation">🤖 {item.explanation}</div>' if item.explanation else ""
+            # Build feature tags
+            features_html = ""
+            if r.tags:
+                features_html += '<div style="margin-bottom: 1rem;"><div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🏷️ Features</div><div>'
+                for tag in r.tags:
+                    features_html += f'<span class="tag-pill">{tag}</span>'
+                features_html += '</div></div>'
             
-            card_html = f"""
-            <div class="restaurant-card">
+            # Build AI explanation
+            ai_html = ""
+            if item.explanation:
+                ai_html = f'<div class="ai-explanation">🤖 {item.explanation}</div>'
+            
+            # Complete card HTML
+            card_html = f'''<div class="restaurant-card">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
                     <div>
                         <span class="rank-badge">#{item.rank}</span>
@@ -508,15 +513,15 @@ if search_btn or quick != "— choose —":
                 <div style="margin-bottom: 1rem;">
                     <div style="font-weight: 600; color: #374151; margin-bottom: 0.5rem;">🍴 Cuisines</div>
                     <div>
-                        {cuisine_tags}
+                        {cuisine_html}
                     </div>
                 </div>
                 
-                {features_section}
+                {features_html}
                 
-                {ai_explanation}
-            </div>
-            """
+                {ai_html}
+            </div>'''
+            
             st.markdown(card_html, unsafe_allow_html=True)
 
             st.divider()
