@@ -408,11 +408,48 @@ def budget_display(band: BudgetBand) -> str:
 
 # ── Main area ─────────────────────────────────────────────────────────────────
 
-# Compact ForkFinder Header
+# Enhanced ForkFinder Header
 st.markdown("""
-<div style="text-align: center; padding: 1rem 0 0.5rem 0; margin-bottom: 0.5rem;">
-    <h1 style="color: #f97316; font-size: 2rem; font-weight: 800; margin: 0;">🍽️ ForkFinder</h1>
-    <p style="color: #6b7280; font-size: 0.95rem; margin: 0.25rem 0;">AI-Powered Restaurant Discovery</p>
+<div style="text-align: center; padding: 1.5rem 0 1rem 0; margin-bottom: 0.5rem; background: linear-gradient(135deg, #fff7ed 0%, #ffffff 50%, #fee2e2 100%); border-radius: 20px; box-shadow: 0 8px 32px rgba(249, 115, 22, 0.15); position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #f97316 0%, #ef4444 50%, #f97316 100%); animation: shimmer 2s ease-in-out infinite;"></div>
+    <div style="display: inline-block; animation: float 3s ease-in-out infinite;">
+        <div style="font-size: 3rem; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 8px rgba(249, 115, 22, 0.3)); animation: pulse 2s ease-in-out infinite;">🍽️</div>
+    </div>
+    <h1 style="background: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #f97316 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; font-weight: 900; margin: 0; text-shadow: 0 2px 4px rgba(249, 115, 22, 0.1); animation: glow 3s ease-in-out infinite;">
+        ForkFinder
+    </h1>
+    <p style="color: #6b7280; font-size: 1rem; margin: 0.5rem 0; font-weight: 500; letter-spacing: 0.5px;">
+        🤖 <span style="color: #f97316; font-weight: 600;">AI-Powered</span> Restaurant Discovery
+    </p>
+    <div style="margin-top: 0.75rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <span style="background: linear-gradient(135deg, #f97316 0%, #ef4444 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);">
+            🚀 Groq LLM
+        </span>
+        <span style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);">
+            📊 Real-time Data
+        </span>
+        <span style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);">
+            🎯 Smart Filters
+        </span>
+    </div>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+    </style>
 </div>
 """, unsafe_allow_html=True)
 
