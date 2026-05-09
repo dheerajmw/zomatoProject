@@ -94,7 +94,7 @@ def validate_llm_recommendations(
             RecommendationItem(
                 rank=len(validated) + 1,
                 restaurant_id=restaurant_id,
-                restaurant=lookup[restaurant_id],
+                restaurant=lookup[restaurant_id].model_dump(),
                 explanation=explanation or "Matches the user's preferences based on the provided candidate data.",
             )
         )
@@ -116,7 +116,7 @@ def _fallback_recommendations(
             RecommendationItem(
                 rank=idx,
                 restaurant_id=restaurant.id,
-                restaurant=restaurant,
+                restaurant=restaurant.model_dump(),
                 explanation=(
                     f"Selected from the deterministic candidate list: {restaurant.name} "
                     f"matches the requested city, budget, cuisine, and minimum rating filters."
