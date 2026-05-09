@@ -103,11 +103,11 @@ st.markdown("""
     
     /* Light theme specific restaurant card styling */
     [data-theme="light"] .restaurant-card {
-        background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-        border: 1px solid #f3f4f6;
+        background: linear-gradient(135deg, #fed7aa 0%, #fbbf24 50%, #fb923c 100%);
+        border: 1px solid #f59e0b;
         border-radius: 12px;
         margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+        box-shadow: 0 2px 8px rgba(251, 146, 60, 0.2), 0 1px 2px rgba(251, 146, 60, 0.3);
         transition: all 0.3s ease;
         overflow: hidden;
         position: relative;
