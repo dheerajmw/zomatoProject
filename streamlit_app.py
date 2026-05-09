@@ -294,35 +294,61 @@ st.markdown("""
         letter-spacing: -0.025em !important;
     }
     
-    /* Dark Theme Support - CSS Custom Properties and Universal Override */
-    :root {
-        --bg-primary: #fafafa;
-        --bg-secondary: #f5f5f5;
+    /* Dark Theme Support - Aggressive approach with universal selectors */
+    body[data-testid="stAppViewContainer"][data-theme="dark"],
+    .stApp.darkTheme,
+    .stApp[data-theme="dark"],
+    [data-theme="dark"] .stApp,
+    [data-theme="dark"] body,
+    [data-theme="dark"] html {
+        background: #0f0f0f !important;
+        background-color: #0f0f0f !important;
     }
     
-    [data-theme="dark"] {
-        --bg-primary: #0f0f0f !important;
-        --bg-secondary: #1a1a1a !important;
+    /* Force dark background on all container elements */
+    [data-theme="dark"] div,
+    [data-theme="dark"] main,
+    [data-theme="dark"] section,
+    [data-theme="dark"] [data-testid="stAppViewContainer"],
+    [data-theme="dark"] [data-testid="stAppViewContainer"] > div,
+    [data-theme="dark"] [data-testid="stAppViewContainer"] > div > div,
+    [data-theme="dark"] [data-testid="stAppViewContainer"] > div > div > div,
+    [data-theme="dark"] .main,
+    [data-theme="dark"] .element-container,
+    [data-theme="dark"] .block-container,
+    [data-theme="dark"] .stVerticalBlock,
+    [data-theme="dark"] .stHorizontalBlock {
+        background: transparent !important;
+        background-color: transparent !important;
     }
     
-    /* Universal dark theme override */
-    * {
-        background-color: var(--bg-primary) !important;
+    /* Override any light backgrounds */
+    [data-theme="dark"] [style*="background"],
+    [data-theme="dark"] [style*="background-color"] {
+        background: #0f0f0f !important;
+        background-color: #0f0f0f !important;
     }
     
-    body, html, .stApp, [data-testid="stAppViewContainer"] {
-        background: var(--bg-primary) !important;
-        background-color: var(--bg-primary) !important;
+    /* Alternative dark theme detection */
+    .stApp.darkTheme,
+    .stApp.darkTheme body,
+    .stApp.darkTheme [data-testid="stAppViewContainer"],
+    .stApp.darkTheme [data-testid="stAppViewContainer"] > div,
+    .stApp.darkTheme [data-testid="stAppViewContainer"] > div > div {
+        background: #0f0f0f !important;
+        background-color: #0f0f0f !important;
     }
     
-    /* Override all possible containers */
-    div, main, section, .element-container, .block-container, .stVerticalBlock, .stHorizontalBlock {
-        background-color: var(--bg-primary) !important;
-    }
-    
-    /* Make specific elements transparent to show background */
-    .restaurant-card, .stat-box, .ai-explanation {
-        background: #2a2a2a !important;
+    /* Force transparent for containers in dark theme */
+    .stApp.darkTheme div,
+    .stApp.darkTheme main,
+    .stApp.darkTheme section,
+    .stApp.darkTheme .element-container,
+    .stApp.darkTheme .block-container,
+    .stApp.darkTheme .stVerticalBlock,
+    .stApp.darkTheme .stHorizontalBlock {
+        background: transparent !important;
+        background-color: transparent !important;
     }
     
     .stApp.darkTheme .restaurant-card {
@@ -576,45 +602,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Add JavaScript to force dark theme detection
-st.markdown("""
-<script>
-// Force dark theme detection and application
-function applyDarkTheme() {
-    const isDark = document.body.classList.contains('darkTheme') || 
-                   document.documentElement.getAttribute('data-theme') === 'dark' ||
-                   window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (isDark) {
-        // Apply dark background to all elements
-        document.documentElement.style.setProperty('--bg-primary', '#0f0f0f');
-        document.documentElement.style.setProperty('--bg-secondary', '#1a1a1a');
-        
-        // Force dark background on body and main elements
-        document.body.style.background = '#0f0f0f';
-        document.body.style.backgroundColor = '#0f0f0f';
-        
-        // Apply to all containers
-        const containers = document.querySelectorAll('div, main, section, .element-container, .block-container');
-        containers.forEach(el => {
-            if (!el.classList.contains('restaurant-card') && 
-                !el.classList.contains('stat-box') && 
-                !el.classList.contains('ai-explanation')) {
-                el.style.backgroundColor = '#0f0f0f';
-            }
-        });
-    }
-}
-
-// Run immediately and continuously check
-applyDarkTheme();
-setInterval(applyDarkTheme, 1000);
-
-// Also check for theme changes
-const observer = new MutationObserver(applyDarkTheme);
-observer.observe(document.body, { attributes: true, attributeFilter: ['class', 'data-theme'] });
-</script>
-""", unsafe_allow_html=True)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
