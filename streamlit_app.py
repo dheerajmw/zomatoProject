@@ -187,21 +187,81 @@ st.markdown("""
     
     /* Input styling */
     .stTextInput > div > div > input,
-    .stSelectbox > div > div > select {
+    .stSelectbox > div > div > select,
+    .stNumberInput > div > div > input,
+    .stTextArea > div > div > textarea {
         border: 2px solid #e5e7eb;
         border-radius: 8px;
         transition: all 0.3s ease;
+        cursor: pointer;
     }
     
     .stTextInput > div > div > input:focus,
-    .stSelectbox > div > div > select:focus {
+    .stSelectbox > div > div > select:focus,
+    .stNumberInput > div > div > input:focus,
+    .stTextArea > div > div > textarea:focus {
         border-color: #f97316;
         box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+        cursor: text;
+    }
+    
+    /* Dropdown and select cursor styling */
+    .stSelectbox > div > div > select,
+    .stMultiSelect > div > div > select,
+    .stSelectbox > div[data-testid="stSelectbox"] > div > div,
+    .stMultiSelect > div[data-testid="stMultiSelect"] > div > div {
+        cursor: pointer !important;
+    }
+    
+    /* Radio button and checkbox cursor styling */
+    .stRadio > div,
+    .stCheckbox > div {
+        cursor: pointer;
+    }
+    
+    .stRadio > div > label,
+    .stCheckbox > div > label {
+        cursor: pointer;
+    }
+    
+    /* Slider cursor styling */
+    .stSlider > div > div > div {
+        cursor: pointer;
+    }
+    
+    /* Button cursor styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
     }
     
     /* Slider styling */
     .stSlider > div > div > div {
         background: linear-gradient(90deg, #f97316 0%, #ef4444 100%);
+        cursor: pointer;
+    }
+    
+    /* Quick search dropdown cursor styling */
+    .stSelectbox[data-testid="stSelectbox"] > div > div {
+        cursor: pointer !important;
+    }
+    
+    /* All interactive elements cursor styling */
+    [data-testid="stSelectbox"],
+    [data-testid="stMultiSelect"],
+    [data-testid="stTextInput"],
+    [data-testid="stNumberInput"],
+    [data-testid="stTextArea"],
+    [data-testid="stRadio"],
+    [data-testid="stCheckbox"],
+    [data-testid="stSlider"],
+    [data-testid="stButton"] {
+        cursor: pointer !important;
     }
     
     /* Metric styling */
